@@ -27,6 +27,7 @@ final class IvkoService {
 			c.httpCookieAcceptPolicy = .never
 			c.httpShouldSetCookies = false
 			c.httpAdditionalHeaders = IvkoService.commonHeaders
+			c.requestCachePolicy = .reloadIgnoringLocalCacheData
 			return c
 		}()
 
