@@ -192,7 +192,7 @@ fileprivate extension IvkoService {
 	//	MARK:- Execution
 
 	func execute(_ urlRequest: URLRequest, path: Path, callback: @escaping ServiceCallback) {
-		let op = NetworkOperation(urlRequest: urlRequest, urlSessionConfiguration: urlSessionConfiguration) {
+		let op = NetworkOperation(urlRequest: urlRequest, urlSession: urlSession) {
 //			[unowned self]
 			payload in
 
