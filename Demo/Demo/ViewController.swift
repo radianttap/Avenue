@@ -8,6 +8,36 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
+	//	UI
+
+	@IBOutlet private weak var textView: UITextView!
+
+	//	Dependencies
+
+	private lazy var service: IvkoService = {
+		return IvkoService.shared
+	}()
+
+	//	View Lifecycle
+
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+
+		service.call(path: .promotions) {
+			[weak self] json, serviceError in
+
+			DispatchQueue.main.async {
+				guard let `self` = self else { return }
+
+				if let serviceError = serviceError {
+					self.textView.text = serviceError.localizedDescription
+					return
+				}
+
+				self.textView.text = String(describing: json ?? [:])
+			}
+		}
+	}
 }
 
