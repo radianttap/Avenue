@@ -6,7 +6,13 @@
 //  Copyright © 2017. Radiant Tap. All rights reserved.
 //
 
+#if os(iOS)
 import UIKit
+#endif
+
+#if os(watchOS)
+import Foundation
+#endif
 
 
 public typealias JSON = [String: Any]
@@ -178,9 +184,17 @@ fileprivate extension IvkoService {
 	}()
 
 	static var userAgent: String = {
-		let osName = UIDevice.current.systemName
-		let osVersion = UIDevice.current.systemVersion
-		let deviceVersion = UIDevice.current.model
+		#if os(iOS)
+			let osName = UIDevice.current.systemName
+			let osVersion = UIDevice.current.systemVersion
+			let deviceVersion = UIDevice.current.model
+		#endif
+		#if os(watchOS)
+			let osName = "watchOS"
+			let osVersion = ""
+			let deviceVersion = "Apple Watch"
+		#endif
+
 		let locale = Locale.current.identifier
 		return "\( Bundle.appName ) \( Bundle.appVersion ) (\( Bundle.appBuild )); \( deviceVersion ); \( osName ) \( osVersion ); \( locale )"
 	}()
