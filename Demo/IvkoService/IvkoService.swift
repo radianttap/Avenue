@@ -196,6 +196,11 @@ fileprivate extension IvkoService {
 //			[unowned self]
 			payload in
 
+			if let tsStart = payload.tsStart, let tsEnd = payload.tsEnd {
+				let period = tsEnd.timeIntervalSince(tsStart) * 1000
+				print("\t⏱: \( period ) ms")
+			}
+
 			//	process the returned stuff, now
 			if let error = payload.error {
 				callback(nil, IvkoServiceError.network(error) )
