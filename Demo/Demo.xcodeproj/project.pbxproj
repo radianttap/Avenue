@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D01EB05C1F7BBA330042C837 /* NetworkTaskMetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01EB05B1F7BBA330042C837 /* NetworkTaskMetric.swift */; };
 		D05E0D181F48466C0000EAF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E0D171F48466C0000EAF1 /* AppDelegate.swift */; };
 		D05E0D1A1F48466C0000EAF1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E0D191F48466C0000EAF1 /* ViewController.swift */; };
 		D05E0D1D1F48466C0000EAF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D05E0D1B1F48466C0000EAF1 /* Main.storyboard */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D01EB05B1F7BBA330042C837 /* NetworkTaskMetric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkTaskMetric.swift; path = ../NetworkTaskMetric.swift; sourceTree = "<group>"; };
 		D05E0D141F48466C0000EAF1 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D05E0D171F48466C0000EAF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D05E0D191F48466C0000EAF1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				D05E0D2E1F4846AC0000EAF1 /* NetworkOperation.swift */,
 				D05E0D2C1F4846AC0000EAF1 /* NetworkPayload.swift */,
 				D05E0D2A1F4846AC0000EAF1 /* NetworkError.swift */,
+				D01EB05B1F7BBA330042C837 /* NetworkTaskMetric.swift */,
 				D05E0D2D1F4846AC0000EAF1 /* ServerTrustPolicy.swift */,
 				D05E0D2B1F4846AC0000EAF1 /* Network-Extensions.swift */,
 			);
@@ -177,6 +180,7 @@
 				D05E0D181F48466C0000EAF1 /* AppDelegate.swift in Sources */,
 				D05E0D341F48474F0000EAF1 /* NetworkOperation.swift in Sources */,
 				D05E0D331F48474F0000EAF1 /* NetworkError.swift in Sources */,
+				D01EB05C1F7BBA330042C837 /* NetworkTaskMetric.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
