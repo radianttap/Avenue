@@ -52,7 +52,6 @@ final class NetworkOperation: AsyncOperation {
 			})
 		}
 
-		taskMetrics[.tsStart] = Date()
 		task?.resume()
 	}
 
@@ -60,12 +59,10 @@ final class NetworkOperation: AsyncOperation {
 		if isUsingURLSessionDelegate {
 			localURLSession.invalidateAndCancel()
 		}
-		taskMetrics[.tsEnd] = Date()
 
 		payload.end()
 		markFinished()
 
-//		log(level: .debug, "Metrics:\n\( NetworkTaskMetric.printout(taskMetrics) )")
 		callback(payload)
 	}
 
@@ -128,7 +125,6 @@ final class NetworkOperation: AsyncOperation {
 	fileprivate var task: URLSessionDataTask?
 
 	var allowEmptyData: Bool = true
-	fileprivate var taskMetrics: [NetworkTaskMetric: Any] = [:]
 }
 
 
