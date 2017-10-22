@@ -180,6 +180,10 @@ final class NetworkOperation: AsyncOperation {
 
 extension NetworkOperation: URLSessionDataDelegate {
 
+	func urlSession(_ session: URLSession, task: URLSessionTask, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+		urlSession(session, didReceive: challenge, completionHandler: completionHandler)
+	}
+
 	func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
 		if isCancelled {
 			return
