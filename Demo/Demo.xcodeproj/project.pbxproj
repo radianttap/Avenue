@@ -205,13 +205,13 @@
 		D05E0D291F4846920000EAF1 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				D0117ABE1F9CC87900F5D4E1 /* NetworkSession.swift */,
 				D05E0D2E1F4846AC0000EAF1 /* NetworkOperation.swift */,
 				D05E0D2C1F4846AC0000EAF1 /* NetworkPayload.swift */,
 				D05E0D2A1F4846AC0000EAF1 /* NetworkError.swift */,
 				D0117ABB1F9CC26700F5D4E1 /* NetworkHTTPMethod.swift */,
 				D05E0D2D1F4846AC0000EAF1 /* ServerTrustPolicy.swift */,
 				D05E0D2B1F4846AC0000EAF1 /* Network-Extensions.swift */,
-				D0117ABE1F9CC87900F5D4E1 /* NetworkSession.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";

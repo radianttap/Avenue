@@ -17,11 +17,21 @@ import Foundation
 
 public typealias JSON = [String: Any]
 
-final class IvkoService {
+final class IvkoService: NetworkSession {
 	static let shared = IvkoService()
 
+	private override init(urlSessionConfiguration: URLSessionConfiguration) {
+		fatalError("Not implemented, use `init()`")
+	}
+
 	private init() {
-		urlSessionConfiguration = {
+		queue = {
+			let oq = OperationQueue()
+			oq.qualityOfService = .userInitiated
+			return oq
+		}()
+
+		let urlSessionConfiguration: URLSessionConfiguration = {
 			let c = URLSessionConfiguration.default
 			c.allowsCellularAccess = true
 			c.httpCookieAcceptPolicy = .never
@@ -30,18 +40,11 @@ final class IvkoService {
 			c.requestCachePolicy = .reloadIgnoringLocalCacheData
 			return c
 		}()
-
-		urlSession = URLSession(configuration: urlSessionConfiguration)
-
-		queue = {
-			let oq = OperationQueue()
-			oq.qualityOfService = .userInitiated
-			return oq
-		}()
+		super.init(urlSessionConfiguration: urlSessionConfiguration)
 	}
 
-	fileprivate var urlSessionConfiguration: URLSessionConfiguration
-	fileprivate var urlSession: URLSession
+	//	Local stuff
+
 	fileprivate var queue: OperationQueue
 }
 

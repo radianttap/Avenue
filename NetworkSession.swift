@@ -13,10 +13,14 @@ import Foundation
 ///	This is very shallow class; its purpose is to handle Authentication challenges, but due to
 ///	general URLSession/DataTask architecture, it also must handle the task-level URLSessionDelegate methods.
 class NetworkSession: NSObject {
-	var urlSessionConfiguration: URLSessionConfiguration = .default
+	var urlSessionConfiguration: URLSessionConfiguration
 	var urlSession: URLSession!
 
-	override init() {
+	private override init() {
+		fatalError("Must use `init(urlSessionConfiguration:)")
+	}
+
+	init(urlSessionConfiguration: URLSessionConfiguration = .default) {
 		super.init()
 
 		urlSession = URLSession(configuration: urlSessionConfiguration,
