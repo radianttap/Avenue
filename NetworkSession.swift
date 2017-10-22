@@ -64,13 +64,13 @@ extension NetworkSession: URLSessionDataDelegate {
 	{
 		if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
 			guard let trust = challenge.protectionSpace.serverTrust else {
-				completionHandler(URLSession.AuthChallengeDisposition.performDefaultHandling, nil)
+				completionHandler(.performDefaultHandling, nil)
 				return
 			}
 			let host = challenge.protectionSpace.host
 
 			guard session.serverTrustPolicy.evaluate(trust, forHost: host) else {
-				completionHandler(URLSession.AuthChallengeDisposition.rejectProtectionSpace, nil)
+				completionHandler(.rejectProtectionSpace, nil)
 
 				if let dataTask = task {
 					let authError = NetworkError.urlError( NSError(domain: NSURLErrorDomain,
@@ -82,11 +82,11 @@ extension NetworkSession: URLSessionDataDelegate {
 			}
 
 			let credential = URLCredential(trust: trust)
-			completionHandler(URLSession.AuthChallengeDisposition.useCredential, credential)
+			completionHandler(.useCredential, credential)
 			return
 		}
 
-		completionHandler(URLSession.AuthChallengeDisposition.performDefaultHandling, nil)
+		completionHandler(.performDefaultHandling, nil)
 	}
 
 	//	MARK: Data callbacks
