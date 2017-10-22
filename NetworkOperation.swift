@@ -65,7 +65,7 @@ final class NetworkOperation: AsyncOperation {
 		self.callback = callback
 		self.urlSessionConfiguration = urlSession.configuration
 		self.localURLSession = urlSession
-		self.isUsingURLSessionDelegate = false
+		self.isUsingURLSessionDelegate = false	//	some other object will be delegate. How this can possibly work, no idea.
 		super.init()
 
 		processHTTPMethod()
