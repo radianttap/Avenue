@@ -43,9 +43,24 @@ extension NetworkSession: URLSessionDataDelegate {
 	//	MARK: Authentication callbacks
 
 	func urlSession(_ session: URLSession,
+					didReceive challenge: URLAuthenticationChallenge,
+					completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void)
+	{
+		handleURLSession(session, task: nil, didReceive: challenge, completionHandler: completionHandler)
+	}
+
+	func urlSession(_ session: URLSession,
 					task: URLSessionTask,
 					didReceive challenge: URLAuthenticationChallenge,
 					completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void)
+	{
+		handleURLSession(session, task: task as? URLSessionDataTask, didReceive: challenge, completionHandler: completionHandler)
+	}
+
+	fileprivate func handleURLSession(_ session: URLSession,
+									 task: URLSessionDataTask?,
+									 didReceive challenge: URLAuthenticationChallenge,
+									 completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void)
 	{
 		if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
 			guard let trust = challenge.protectionSpace.serverTrust else {
@@ -57,7 +72,7 @@ extension NetworkSession: URLSessionDataDelegate {
 			guard session.serverTrustPolicy.evaluate(trust, forHost: host) else {
 				completionHandler(URLSession.AuthChallengeDisposition.rejectProtectionSpace, nil)
 
-				if let dataTask = task as? URLSessionDataTask {
+				if let dataTask = task {
 					let authError = NetworkError.urlError( NSError(domain: NSURLErrorDomain,
 																   code: URLError.userCancelledAuthentication.rawValue,
 																   userInfo: nil) as? URLError )
