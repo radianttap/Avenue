@@ -47,6 +47,8 @@ final class NetworkOperation: AsyncOperation {
 		self.urlSessionConfiguration = urlSessionConfiguration
 		self.isUsingURLSessionDelegate = usesDelegate
 		super.init()
+
+		processHTTPMethod()
 	}
 
 	/// Designated initializer, uses supplied URLSession instance. Always uses completionHandler form of URLSessionDataTask
@@ -65,6 +67,8 @@ final class NetworkOperation: AsyncOperation {
 		self.localURLSession = urlSession
 		self.isUsingURLSessionDelegate = false
 		super.init()
+
+		processHTTPMethod()
 	}
 
 	fileprivate(set) var payload: NetworkPayload
@@ -118,8 +122,19 @@ final class NetworkOperation: AsyncOperation {
 				self.payload.response = response as? HTTPURLResponse
 				if let e = error {
 					self.payload.error = .urlError(e as? URLError)
+
 				} else {
 					self.payload.data = data
+
+					if let data = data {
+						if data.isEmpty && !self.allowEmptyData {
+							self.payload.error = .noData
+						}
+					} else {
+						if !self.allowEmptyData {
+							self.payload.error = .noData
+						}
+					}
 				}
 
 				self.finish()
@@ -150,6 +165,15 @@ final class NetworkOperation: AsyncOperation {
 		payload.error = .cancelled
 
 		finish()
+	}
+
+	fileprivate func processHTTPMethod() {
+		guard
+			let method = payload.originalRequest.httpMethod,
+			let m = NetworkHTTPMethod(rawValue: method)
+		else { return }
+
+		allowEmptyData = m.allowsEmptyResponseData
 	}
 }
 
