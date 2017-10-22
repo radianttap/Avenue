@@ -12,6 +12,8 @@ import Foundation
 ///
 ///	This is very shallow class; its purpose is to handle Authentication challenges, but due to
 ///	general URLSession/DataTask architecture, it also must handle the task-level URLSessionDelegate methods.
+///
+///	This is accomplished by forcefully expanding URLSessionDataTask, see NetworkTask.swift
 class NetworkSession: NSObject {
 	var urlSessionConfiguration: URLSessionConfiguration
 	var urlSession: URLSession!
@@ -37,20 +39,14 @@ class NetworkSession: NSObject {
 	}
 }
 
-extension NetworkSession: URLSessionDelegate {
+extension NetworkSession: URLSessionDataDelegate {
+	//	MARK: Authentication callbacks
+
 	func urlSession(_ session: URLSession,
 					task: URLSessionTask,
 					didReceive challenge: URLAuthenticationChallenge,
 					completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void)
 	{
-		urlSession(session, didReceive: challenge, completionHandler: completionHandler)
-	}
-
-	func urlSession(_ session: URLSession,
-					didReceive challenge: URLAuthenticationChallenge,
-					completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void)
-	{
-
 		if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
 			guard let trust = challenge.protectionSpace.serverTrust else {
 				completionHandler(URLSession.AuthChallengeDisposition.performDefaultHandling, nil)
@@ -60,6 +56,13 @@ extension NetworkSession: URLSessionDelegate {
 
 			guard session.serverTrustPolicy.evaluate(trust, forHost: host) else {
 				completionHandler(URLSession.AuthChallengeDisposition.rejectProtectionSpace, nil)
+
+				if let dataTask = task as? URLSessionDataTask {
+					let authError = NetworkError.urlError( NSError(domain: NSURLErrorDomain,
+																   code: URLError.userCancelledAuthentication.rawValue,
+																   userInfo: nil) as? URLError )
+					dataTask.errorCallback(authError)
+				}
 				return
 			}
 
@@ -69,6 +72,38 @@ extension NetworkSession: URLSessionDelegate {
 		}
 
 		completionHandler(URLSession.AuthChallengeDisposition.performDefaultHandling, nil)
+	}
+
+	//	MARK: Data callbacks
+
+	//	this checks the response headers
+	final func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
+		guard let httpResponse = response as? HTTPURLResponse else {
+			completionHandler(.cancel)
+			dataTask.errorCallback(.invalidResponse)
+			return
+		}
+
+		dataTask.responseCallback(httpResponse)
+
+		//	always allow data to arrive in order to
+		//	extract possible API error messages
+		completionHandler(.allow)
+	}
+
+	//	this will be called multiple times while the data is coming in
+	final func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+		dataTask.dataCallback(data)
+	}
+
+	final func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Swift.Error?) {
+		guard let dataTask = task as? URLSessionDataTask else { return }
+
+		if let e = error {
+			dataTask.errorCallback( .urlError(e as? URLError) )
+			return
+		}
+		dataTask.finishCallback()
 	}
 }
 

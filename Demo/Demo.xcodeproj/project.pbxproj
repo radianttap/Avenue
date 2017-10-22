@@ -11,6 +11,8 @@
 		D0117ABD1F9CC26700F5D4E1 /* NetworkHTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0117ABB1F9CC26700F5D4E1 /* NetworkHTTPMethod.swift */; };
 		D0117ABF1F9CC87900F5D4E1 /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0117ABE1F9CC87900F5D4E1 /* NetworkSession.swift */; };
 		D0117AC01F9CC87900F5D4E1 /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0117ABE1F9CC87900F5D4E1 /* NetworkSession.swift */; };
+		D0117AC21F9CF66000F5D4E1 /* NetworkTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0117AC11F9CF66000F5D4E1 /* NetworkTask.swift */; };
+		D0117AC31F9CF66000F5D4E1 /* NetworkTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0117AC11F9CF66000F5D4E1 /* NetworkTask.swift */; };
 		D01EB0631F7BBBE60042C837 /* AssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01EB0601F7BBBE60042C837 /* AssetManager.swift */; };
 		D01EB0641F7BBBE60042C837 /* IvkoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01EB0611F7BBBE60042C837 /* IvkoService.swift */; };
 		D01EB0651F7BBBE60042C837 /* IvkoServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01EB0621F7BBBE60042C837 /* IvkoServiceError.swift */; };
@@ -89,6 +91,7 @@
 /* Begin PBXFileReference section */
 		D0117ABB1F9CC26700F5D4E1 /* NetworkHTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkHTTPMethod.swift; path = ../NetworkHTTPMethod.swift; sourceTree = "<group>"; };
 		D0117ABE1F9CC87900F5D4E1 /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkSession.swift; path = ../NetworkSession.swift; sourceTree = "<group>"; };
+		D0117AC11F9CF66000F5D4E1 /* NetworkTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkTask.swift; path = ../NetworkTask.swift; sourceTree = "<group>"; };
 		D01EB0601F7BBBE60042C837 /* AssetManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetManager.swift; sourceTree = "<group>"; };
 		D01EB0611F7BBBE60042C837 /* IvkoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IvkoService.swift; sourceTree = "<group>"; };
 		D01EB0621F7BBBE60042C837 /* IvkoServiceError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IvkoServiceError.swift; sourceTree = "<group>"; };
@@ -205,9 +208,10 @@
 		D05E0D291F4846920000EAF1 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				D05E0D2C1F4846AC0000EAF1 /* NetworkPayload.swift */,
 				D0117ABE1F9CC87900F5D4E1 /* NetworkSession.swift */,
 				D05E0D2E1F4846AC0000EAF1 /* NetworkOperation.swift */,
-				D05E0D2C1F4846AC0000EAF1 /* NetworkPayload.swift */,
+				D0117AC11F9CF66000F5D4E1 /* NetworkTask.swift */,
 				D05E0D2A1F4846AC0000EAF1 /* NetworkError.swift */,
 				D0117ABB1F9CC26700F5D4E1 /* NetworkHTTPMethod.swift */,
 				D05E0D2D1F4846AC0000EAF1 /* ServerTrustPolicy.swift */,
@@ -368,6 +372,7 @@
 				D01EB08D1F7BC08A0042C837 /* IvkoService.swift in Sources */,
 				D0117AC01F9CC87900F5D4E1 /* NetworkSession.swift in Sources */,
 				D01EB0951F7BC0A40042C837 /* ServerTrustPolicy.swift in Sources */,
+				D0117AC31F9CF66000F5D4E1 /* NetworkTask.swift in Sources */,
 				D01EB0901F7BC0930042C837 /* AsyncOperation.swift in Sources */,
 				D01EB0931F7BC0A40042C837 /* NetworkError.swift in Sources */,
 				D01EB07C1F7BC0040042C837 /* InterfaceController.swift in Sources */,
@@ -380,6 +385,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0117ABC1F9CC26700F5D4E1 /* NetworkHTTPMethod.swift in Sources */,
+				D0117AC21F9CF66000F5D4E1 /* NetworkTask.swift in Sources */,
 				D05E0D351F48474F0000EAF1 /* NetworkPayload.swift in Sources */,
 				D01EB0651F7BBBE60042C837 /* IvkoServiceError.swift in Sources */,
 				D05E0D1A1F48466C0000EAF1 /* ViewController.swift in Sources */,

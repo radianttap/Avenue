@@ -83,10 +83,10 @@ final class NetworkOperation: AsyncOperation {
 	fileprivate(set) var task: URLSessionDataTask?
 
 	///	By default, Operation will not treat empty data in the response as error.
-	///	This is normal in HEAD, PUT or DELETE methods, so this value will be changed
+	///	This is normal with HEAD, PUT or DELETE methods, so this value will be changed
 	///	based on the URLRequest.httpMethod value.
 	///
-	///	If you want to enforce a particular value, make sure to alter it
+	///	If you want to enforce a particular value, make sure to set it
 	///	*after* you create the NetworkOperation instance but *before* you add to the OperationQueue.
 	var allowEmptyData: Bool = true
 	fileprivate var incomingData = Data()
@@ -99,12 +99,12 @@ final class NetworkOperation: AsyncOperation {
 		payload.start()
 
 		if localURLSession == nil {
-			//	Create local instance of URLSession, no delegate wil be used
+			//	Create local instance of URLSession, no delegate will be used
 			localURLSession = URLSession(configuration: self.urlSessionConfiguration)
 			//	we need to finish and clean-up tasks at the end
 			shouldCleanupURLSession = true
 
-			//	Create task, which uses completionHandler form
+			//	Create task, using `completionHandler` form
 			task = localURLSession.dataTask(with: payload.urlRequest, completionHandler: {
 				[weak self] data, response, error in
 				guard let `self` = self else { return }
@@ -136,9 +136,10 @@ final class NetworkOperation: AsyncOperation {
 		}
 
 
-		//	If URLSession is already present, it means it's supplied in the `init`
-		//	Thus now just create the task
+		//	First create the task
 		task = localURLSession.dataTask(with: payload.urlRequest)
+		//	then setup handlers for URLSessionDelegate calls
+		setupCallbacks()
 		//	and start it
 		task?.resume()
 	}
@@ -175,89 +176,42 @@ fileprivate extension NetworkOperation {
 		guard
 			let method = payload.originalRequest.httpMethod,
 			let m = NetworkHTTPMethod(rawValue: method)
-			else { return }
+		else { return }
 
 		allowEmptyData = m.allowsEmptyResponseData
 	}
-}
 
+	func setupCallbacks() {
+		guard let task = task else { return }
 
-extension NetworkOperation: URLSessionDataDelegate {
-
-	func urlSession(_ session: URLSession, task: URLSessionTask, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-		urlSession(session, didReceive: challenge, completionHandler: completionHandler)
-	}
-
-	func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-		if isCancelled {
-			return
+		task.errorCallback = {
+			[weak self] error in
+			self?.payload.error = error
+			self?.finish()
 		}
 
-		if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
-			let trust = challenge.protectionSpace.serverTrust!
-			let host = challenge.protectionSpace.host
-			guard session.serverTrustPolicy.evaluate(trust, forHost: host) else {
-				completionHandler(URLSession.AuthChallengeDisposition.rejectProtectionSpace, nil)
+		task.responseCallback = {
+			[weak self] httpResponse in
+			self?.payload.response = httpResponse
+		}
 
-				payload.error = .urlError( NSError(domain: NSURLErrorDomain, code: URLError.userCancelledAuthentication.rawValue, userInfo: nil) as? URLError )
-				finish()
+		task.dataCallback = {
+			[weak self] data in
+			self?.incomingData.append(data)
+		}
+
+		task.finishCallback = {
+			[weak self] in
+			guard let `self` = self else { return }
+
+			if self.incomingData.isEmpty && !self.allowEmptyData {
+				self.payload.error = .noData
+				self.finish()
 				return
 			}
 
-			let credential = URLCredential(trust: trust)
-			completionHandler(URLSession.AuthChallengeDisposition.useCredential, credential)
+			self.payload.data = self.incomingData
+			self.finish()
 		}
-
-		completionHandler(URLSession.AuthChallengeDisposition.performDefaultHandling, nil)
-	}
-
-	//	this checks the response headers
-	final func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
-		if isCancelled {
-			return
-		}
-
-		//	Check the response code and react appropriately
-		guard let httpResponse = response as? HTTPURLResponse else {
-			payload.error = .invalidResponse
-			completionHandler(.cancel)
-			finish()
-			return
-		}
-
-		payload.response = httpResponse
-
-		//	always allow data to arrive in order to extract possible API error messages to show up
-		completionHandler(.allow)
-	}
-
-	//	this will be called multiple times while the data is coming in
-	final func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
-		if isCancelled {
-			return
-		}
-
-		incomingData.append(data)
-	}
-
-	final func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Swift.Error?) {
-		if isCancelled {
-			return
-		}
-
-		if let e = error {
-			payload.error = .urlError(e as? URLError)
-		} else {
-			if incomingData.isEmpty {
-				if !allowEmptyData {
-					payload.error = .noData
-				}
-			} else {
-				payload.data = incomingData
-			}
-		}
-
-		finish()
 	}
 }
-

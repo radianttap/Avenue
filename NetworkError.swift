@@ -8,10 +8,13 @@
 
 import Foundation
 
-enum NetworkError: Error {
+public enum NetworkError: Error {
 	case invalidResponse
+
 	case noData
+
 	case cancelled
+
 	case urlError(URLError?)
 }
 
