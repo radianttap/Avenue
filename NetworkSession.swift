@@ -21,11 +21,19 @@ class NetworkSession: NSObject {
 	}
 
 	init(urlSessionConfiguration: URLSessionConfiguration = .default) {
+		self.urlSessionConfiguration = urlSessionConfiguration
 		super.init()
 
 		urlSession = URLSession(configuration: urlSessionConfiguration,
 								delegate: self,
 								delegateQueue: nil)
+	}
+
+	deinit {
+		//	this cancels immediatelly
+//		urlSession.invalidateAndCancel()
+		//	this will allow background tasks to finish-up first
+		urlSession.finishTasksAndInvalidate()
 	}
 }
 
