@@ -5,6 +5,23 @@
 //  Copyright © 2017 Radiant Tap
 //  MIT License · http://choosealicense.com/licenses/mit/
 //
+//	Relevant documentation:
+//	(1) ATS (Advanced Transport Security):
+//	https://developer.apple.com/library/content/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW33
+//	(2) TN2232: HTTPS Server Trust Evaluation
+//	https://developer.apple.com/library/content/technotes/tn2232/
+//
+//	Helpful articles:
+//	https://www.nowsecure.com/blog/2017/08/31/security-analysts-guide-nsapptransportsecurity-nsallowsarbitraryloads-app-transport-security-ats-exceptions/
+//	https://github.com/Alamofire/Alamofire#app-transport-security
+//	https://github.com/Alamofire/Alamofire/issues/876
+//	https://infinum.co/the-capsized-eight/how-to-make-your-ios-apps-more-secure-with-ssl-pinning
+//
+//	Tools:
+//	https://badssl.com
+//	nscurl --help (in your macOS Terminal)
+
+
 
 import Foundation
 
@@ -14,6 +31,9 @@ import Foundation
 ///	general URLSession/DataTask architecture, it also must handle the task-level URLSessionDelegate methods.
 ///
 ///	This is accomplished by forcefully expanding URLSessionDataTask, see NetworkTask.swift
+///
+///	Auth challenges like ServerTrust will be automatically handled, using URLSession.serverTrustPolicy value (defined elsewhere).
+///	`userCancelledAuthentication` error will be returned if evaluation fails.
 class NetworkSession: NSObject {
 	var urlSessionConfiguration: URLSessionConfiguration
 	var urlSession: URLSession!

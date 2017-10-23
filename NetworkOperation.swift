@@ -16,13 +16,10 @@ import Foundation
 ///	Or `URLSession` instance if you have it somewhere else.
 ///
 ///	If you don't supply URLSession instance, it will internally create one and use it, just for this one request.
-///	Depending on the value of `usesDelegate` init parameter, it will use closure form or URLSessionDelegate.
-///	If you are using `.background` URLSessionConfiguration, you **must** use URLSessionDelegate.
+///	In this case, no delegate callback execute and thus Auth challenges are not handled. If you need that, make `NetworkSession` subclass.
+///	Note: if you don‘t use the URLSession with delegate, you have no way to handle HTTP Authentication challenges.
 ///
-///	Note: if you don‘t use the URLSessionDelegate (usesDelegate: false in the init), you have no way to handle HTTP Authentication challenges.
-///
-///	In case you are using the delegate, then Auth challenges will be automatically handled, using URLSession.serverTrustPolicy value
-///	`userCancelledAuthentication` error will be returned if evaluation fails.
+///	If you are using `.background` URLSessionConfiguration, you **must** use URLSessionDelegate thus you must supply URLSession instance to the `init`.
 final class NetworkOperation: AsyncOperation {
 	typealias Callback = (NetworkPayload) -> Void
 
@@ -31,7 +28,8 @@ final class NetworkOperation: AsyncOperation {
 	}
 
 
-	/// Designated initializer, allows to create one URLSession per Operation. Can be used with URLSessionDelegate or with completion handler.
+	/// Designated initializer, allows to create one URLSession per Operation.
+	///	URLSession.dataTask will use completionHandler form.
 	///
 	/// - Parameters:
 	///   - urlRequest: `URLRequest` value to execute
@@ -49,7 +47,8 @@ final class NetworkOperation: AsyncOperation {
 		processHTTPMethod()
 	}
 
-	/// Designated initializer, uses supplied URLSession instance. Always uses completionHandler form of URLSessionDataTask
+	/// Designated initializer, it will execute the URLRequest using supplied URLSession instance.
+	///	It‘s assumed that URLSessionDelegate is defined elsewhere (see NetworkSession.swift) and stuff will be called-in here (see `setupCallbacks()`).
 	///
 	/// - Parameters:
 	///   - urlRequest: `URLRequest` value to execute
