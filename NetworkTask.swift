@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension URLSessionDataTask {
+extension URLSessionTask {
 	public typealias NetworkTaskErrorCallback = (NetworkError) -> Void
 	public typealias NetworkTaskResponseCallback = (HTTPURLResponse) -> Void
 	public typealias NetworkTaskDataCallback = (Data) -> Void
