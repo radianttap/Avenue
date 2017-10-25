@@ -172,12 +172,12 @@
 		D05E0D0B1F48466B0000EAF1 = {
 			isa = PBXGroup;
 			children = (
-				D01EB05F1F7BBBE60042C837 /* IvkoService */,
-				D05E0D2F1F4846D70000EAF1 /* Vendor */,
 				D05E0D291F4846920000EAF1 /* Network */,
+				D01EB05F1F7BBBE60042C837 /* IvkoService */,
 				D05E0D161F48466C0000EAF1 /* Demo */,
 				D01EB06B1F7BC0030042C837 /* DemoWatch */,
 				D01EB07A1F7BC0040042C837 /* DemoWatch Extension */,
+				D05E0D2F1F4846D70000EAF1 /* Vendor */,
 				D05E0D151F48466C0000EAF1 /* Products */,
 			);
 			sourceTree = "<group>";
