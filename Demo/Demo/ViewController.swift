@@ -28,20 +28,20 @@ final class ViewController: UIViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 
-//		service.call(path: .promotions) {
-//			[weak self] json, serviceError in
-//
-//			DispatchQueue.main.async {
-//				guard let `self` = self else { return }
-//
-//				if let serviceError = serviceError {
-//					self.textView.text = serviceError.localizedDescription
-//					return
-//				}
-//
-//				self.textView.text = String(describing: json ?? [:])
-//			}
-//		}
+		service.call(path: .promotions) {
+			[weak self] json, serviceError in
+
+			DispatchQueue.main.async {
+				guard let `self` = self else { return }
+
+				if let serviceError = serviceError {
+					self.textView.text = serviceError.localizedDescription
+					return
+				}
+
+				self.textView.text = String(describing: json ?? [:])
+			}
+		}
 
 		if let url = assetManager.cleanurl() {
 			assetManager.call(url: url) {
