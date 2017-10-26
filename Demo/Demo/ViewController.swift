@@ -48,6 +48,12 @@ final class ViewController: UIViewController {
 				_, _ in
 			}
 		}
+
+		if let url = assetManager.cleanurl() {
+			assetManager.call(url: url) {
+				_, _ in
+			}
+		}
 	}
 }
 

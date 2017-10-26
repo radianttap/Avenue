@@ -16,11 +16,10 @@ import Foundation
 ///	Or `URLSession` instance if you have it somewhere else.
 ///
 ///	If you don't supply URLSession instance, it will internally create one and use it, just for this one request.
-///	This URLSession will handle server-trust HTTPAuthenticationChallenge, using `urlSession.serverTrustPolicy`.
-///	Note: if you supply URLSession instance, you are responsible to handle HTTPAuth challenges.
+///	In this case, no delegate callback execute and thus Auth challenges are not handled. If you need that, make `NetworkSession` subclass.
+///	Note: if you don‘t use the URLSession with delegate, you have no way to handle HTTP Authentication challenges.
 ///
-///	If you are using `.background` URLSessionConfiguration, you **must** use URLSessionDelegate
-///	thus you must supply URLSession instance to the `init`.
+///	If you are using `.background` URLSessionConfiguration, you **must** use URLSessionDelegate thus you must supply URLSession instance to the `init`.
 final class NetworkOperation: AsyncOperation {
 	typealias Callback = (NetworkPayload) -> Void
 
@@ -30,6 +29,7 @@ final class NetworkOperation: AsyncOperation {
 
 
 	/// Designated initializer, allows to create one URLSession per Operation.
+	///	URLSession.dataTask will use completionHandler form.
 	///
 	/// - Parameters:
 	///   - urlRequest: `URLRequest` value to execute
@@ -47,7 +47,8 @@ final class NetworkOperation: AsyncOperation {
 		processHTTPMethod()
 	}
 
-	/// Designated initializer, uses supplied URLSession instance. Always uses completionHandler form of URLSessionDataTask
+	/// Designated initializer, it will execute the URLRequest using supplied URLSession instance.
+	///	It‘s assumed that URLSessionDelegate is defined elsewhere (see NetworkSession.swift) and stuff will be called-in here (see `setupCallbacks()`).
 	///
 	/// - Parameters:
 	///   - urlRequest: `URLRequest` value to execute
@@ -98,39 +99,47 @@ final class NetworkOperation: AsyncOperation {
 
 		if localURLSession == nil {
 			//	Create local instance of URLSession, no delegate will be used
-			localURLSession = URLSession(configuration: self.urlSessionConfiguration,
-										 delegate: self,
-										 delegateQueue: nil)
+			localURLSession = URLSession(configuration: self.urlSessionConfiguration)
 			//	we need to finish and clean-up tasks at the end
 			shouldCleanupURLSession = true
-		}
 
-		//	Create task, using `completionHandler` form
-		task = localURLSession.dataTask(with: payload.urlRequest, completionHandler: {
-			[weak self] data, response, error in
-			guard let `self` = self else { return }
+			//	Create task, using `completionHandler` form
+			task = localURLSession.dataTask(with: payload.urlRequest, completionHandler: {
+				[weak self] data, response, error in
+				guard let `self` = self else { return }
 
-			self.payload.response = response as? HTTPURLResponse
-			if let e = error {
-				self.payload.error = .urlError(e as? URLError)
+				self.payload.response = response as? HTTPURLResponse
+				if let e = error {
+					self.payload.error = .urlError(e as? URLError)
 
-			} else {
-				self.payload.data = data
-
-				if let data = data {
-					if data.isEmpty && !self.allowEmptyData {
-						self.payload.error = .noData
-					}
 				} else {
-					if !self.allowEmptyData {
-						self.payload.error = .noData
+					self.payload.data = data
+
+					if let data = data {
+						if data.isEmpty && !self.allowEmptyData {
+							self.payload.error = .noData
+						}
+					} else {
+						if !self.allowEmptyData {
+							self.payload.error = .noData
+						}
 					}
 				}
-			}
 
-			self.finish()
-		})
-		//	start the task
+				self.finish()
+			})
+			//	start the task
+			task?.resume()
+
+			return
+		}
+
+
+		//	First create the task
+		task = localURLSession.dataTask(with: payload.urlRequest)
+		//	then setup handlers for URLSessionDelegate calls
+		setupCallbacks()
+		//	and start it
 		task?.resume()
 	}
 
@@ -156,8 +165,13 @@ final class NetworkOperation: AsyncOperation {
 
 		finish()
 	}
+}
 
-	fileprivate func processHTTPMethod() {
+//	MARK:- Internal
+
+fileprivate extension NetworkOperation {
+
+	func processHTTPMethod() {
 		guard
 			let method = payload.originalRequest.httpMethod,
 			let m = NetworkHTTPMethod(rawValue: method)
@@ -165,41 +179,38 @@ final class NetworkOperation: AsyncOperation {
 
 		allowEmptyData = m.allowsEmptyResponseData
 	}
-}
 
+	func setupCallbacks() {
+		guard let task = task else { return }
 
-extension NetworkOperation: URLSessionDataDelegate {
-
-	func urlSession(_ session: URLSession, task: URLSessionTask, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-		urlSession(session, didReceive: challenge, completionHandler: completionHandler)
-	}
-
-	func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-		if isCancelled {
-			completionHandler(URLSession.AuthChallengeDisposition.cancelAuthenticationChallenge, nil)
-			return
+		task.errorCallback = {
+			[weak self] error in
+			self?.payload.error = error
+			self?.finish()
 		}
 
-		if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
-			let trust = challenge.protectionSpace.serverTrust!
-			let host = challenge.protectionSpace.host
-			guard session.serverTrustPolicy.evaluate(trust, forHost: host) else {
-				completionHandler(URLSession.AuthChallengeDisposition.rejectProtectionSpace, nil)
+		task.responseCallback = {
+			[weak self] httpResponse in
+			self?.payload.response = httpResponse
+		}
 
-				let urlError = NSError(domain: NSURLErrorDomain,
-									   code: URLError.userCancelledAuthentication.rawValue,
-									   userInfo: nil ) as? URLError
-				payload.error = .urlError( urlError )
-				finish()
+		task.dataCallback = {
+			[weak self] data in
+			self?.incomingData.append(data)
+		}
+
+		task.finishCallback = {
+			[weak self] in
+			guard let `self` = self else { return }
+
+			if self.incomingData.isEmpty && !self.allowEmptyData {
+				self.payload.error = .noData
+				self.finish()
 				return
 			}
 
-			let credential = URLCredential(trust: trust)
-			completionHandler(URLSession.AuthChallengeDisposition.useCredential, credential)
-			return
+			self.payload.data = self.incomingData
+			self.finish()
 		}
-
-		completionHandler(URLSession.AuthChallengeDisposition.performDefaultHandling, nil)
 	}
 }
-

@@ -24,7 +24,7 @@ struct NetworkPayload {
 		self.urlRequest = urlRequest
 	}
 
-
+	
 	//	MARK: Result properties
 
 	///	Any error that URLSession may populate (timeouts, no connection etc)

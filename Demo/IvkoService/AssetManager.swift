@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class AssetManager {
+final class AssetManager: NetworkSession {
 	static let shared = AssetManager()
 
 	private init() {
@@ -18,7 +18,7 @@ final class AssetManager {
 			return oq
 		}()
 
-		urlSessionConfiguration = {
+		let urlSessionConfiguration: URLSessionConfiguration = {
 			let c = URLSessionConfiguration.default
 			c.allowsCellularAccess = true
 			c.httpCookieAcceptPolicy = .never
@@ -26,10 +26,11 @@ final class AssetManager {
 			c.requestCachePolicy = .reloadIgnoringLocalCacheData
 			return c
 		}()
+		super.init(urlSessionConfiguration: urlSessionConfiguration)
 	}
 
 	//	Local stuff
-	fileprivate var urlSessionConfiguration: URLSessionConfiguration
+
 	fileprivate var queue: OperationQueue
 }
 
@@ -97,7 +98,7 @@ fileprivate extension AssetManager {
 	//	MARK:- Execution
 
 	func execute(_ urlRequest: URLRequest, callback: @escaping ServiceCallback) {
-		let op = NetworkOperation(urlRequest: urlRequest, urlSessionConfiguration: urlSessionConfiguration) {
+		let op = NetworkOperation(urlRequest: urlRequest, urlSession: urlSession) {
 			//			[unowned self]
 			payload in
 
