@@ -27,7 +27,6 @@
 		D01EB08D1F7BC08A0042C837 /* IvkoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01EB0611F7BBBE60042C837 /* IvkoService.swift */; };
 		D01EB08E1F7BC08A0042C837 /* IvkoServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01EB0621F7BBBE60042C837 /* IvkoServiceError.swift */; };
 		D01EB08F1F7BC0900042C837 /* Bundle-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01EB0661F7BBC5C0042C837 /* Bundle-Extensions.swift */; };
-		D01EB0901F7BC0930042C837 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E0D301F4847150000EAF1 /* AsyncOperation.swift */; };
 		D01EB0911F7BC0A40042C837 /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E0D2E1F4846AC0000EAF1 /* NetworkOperation.swift */; };
 		D01EB0921F7BC0A40042C837 /* NetworkPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E0D2C1F4846AC0000EAF1 /* NetworkPayload.swift */; };
 		D01EB0931F7BC0A40042C837 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E0D2A1F4846AC0000EAF1 /* NetworkError.swift */; };
@@ -38,12 +37,15 @@
 		D05E0D1D1F48466C0000EAF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D05E0D1B1F48466C0000EAF1 /* Main.storyboard */; };
 		D05E0D1F1F48466C0000EAF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D05E0D1E1F48466C0000EAF1 /* Assets.xcassets */; };
 		D05E0D221F48466C0000EAF1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D05E0D201F48466C0000EAF1 /* LaunchScreen.storyboard */; };
-		D05E0D311F4847150000EAF1 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E0D301F4847150000EAF1 /* AsyncOperation.swift */; };
 		D05E0D321F48474F0000EAF1 /* Network-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E0D2B1F4846AC0000EAF1 /* Network-Extensions.swift */; };
 		D05E0D331F48474F0000EAF1 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E0D2A1F4846AC0000EAF1 /* NetworkError.swift */; };
 		D05E0D341F48474F0000EAF1 /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E0D2E1F4846AC0000EAF1 /* NetworkOperation.swift */; };
 		D05E0D351F48474F0000EAF1 /* NetworkPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E0D2C1F4846AC0000EAF1 /* NetworkPayload.swift */; };
 		D05E0D361F48474F0000EAF1 /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05E0D2D1F4846AC0000EAF1 /* ServerTrustPolicy.swift */; };
+		D08555FE2190AA5B00721800 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08555FB2190AA5B00721800 /* Atomic.swift */; };
+		D08555FF2190AA5B00721800 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08555FB2190AA5B00721800 /* Atomic.swift */; };
+		D08556002190AA5B00721800 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08555FD2190AA5B00721800 /* AsyncOperation.swift */; };
+		D08556012190AA5B00721800 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08555FD2190AA5B00721800 /* AsyncOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,7 +119,8 @@
 		D05E0D2C1F4846AC0000EAF1 /* NetworkPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkPayload.swift; path = ../NetworkPayload.swift; sourceTree = "<group>"; };
 		D05E0D2D1F4846AC0000EAF1 /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ServerTrustPolicy.swift; path = ../ServerTrustPolicy.swift; sourceTree = "<group>"; };
 		D05E0D2E1F4846AC0000EAF1 /* NetworkOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkOperation.swift; path = ../NetworkOperation.swift; sourceTree = "<group>"; };
-		D05E0D301F4847150000EAF1 /* AsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
+		D08555FB2190AA5B00721800 /* Atomic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
+		D08555FD2190AA5B00721800 /* AsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,10 +226,19 @@
 		D05E0D2F1F4846D70000EAF1 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				D08555FB2190AA5B00721800 /* Atomic.swift */,
+				D08555FC2190AA5B00721800 /* Operation */,
 				D01EB0661F7BBC5C0042C837 /* Bundle-Extensions.swift */,
-				D05E0D301F4847150000EAF1 /* AsyncOperation.swift */,
 			);
 			path = Vendor;
+			sourceTree = "<group>";
+		};
+		D08555FC2190AA5B00721800 /* Operation */ = {
+			isa = PBXGroup;
+			children = (
+				D08555FD2190AA5B00721800 /* AsyncOperation.swift */,
+			);
+			path = Operation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -375,9 +387,10 @@
 				D0117AC01F9CC87900F5D4E1 /* NetworkSession.swift in Sources */,
 				D01EB0951F7BC0A40042C837 /* ServerTrustPolicy.swift in Sources */,
 				D0117AC31F9CF66000F5D4E1 /* NetworkTask.swift in Sources */,
-				D01EB0901F7BC0930042C837 /* AsyncOperation.swift in Sources */,
 				D01EB0931F7BC0A40042C837 /* NetworkError.swift in Sources */,
 				D01EB07C1F7BC0040042C837 /* InterfaceController.swift in Sources */,
+				D08555FF2190AA5B00721800 /* Atomic.swift in Sources */,
+				D08556012190AA5B00721800 /* AsyncOperation.swift in Sources */,
 				D01EB0911F7BC0A40042C837 /* NetworkOperation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -390,9 +403,9 @@
 				D0117AC21F9CF66000F5D4E1 /* NetworkTask.swift in Sources */,
 				D05E0D351F48474F0000EAF1 /* NetworkPayload.swift in Sources */,
 				D01EB0651F7BBBE60042C837 /* IvkoServiceError.swift in Sources */,
+				D08555FE2190AA5B00721800 /* Atomic.swift in Sources */,
 				D05E0D1A1F48466C0000EAF1 /* ViewController.swift in Sources */,
 				D01EB0641F7BBBE60042C837 /* IvkoService.swift in Sources */,
-				D05E0D311F4847150000EAF1 /* AsyncOperation.swift in Sources */,
 				D05E0D361F48474F0000EAF1 /* ServerTrustPolicy.swift in Sources */,
 				D0117ABF1F9CC87900F5D4E1 /* NetworkSession.swift in Sources */,
 				D05E0D321F48474F0000EAF1 /* Network-Extensions.swift in Sources */,
@@ -400,6 +413,7 @@
 				D05E0D341F48474F0000EAF1 /* NetworkOperation.swift in Sources */,
 				D05E0D331F48474F0000EAF1 /* NetworkError.swift in Sources */,
 				D01EB0631F7BBBE60042C837 /* AssetManager.swift in Sources */,
+				D08556002190AA5B00721800 /* AsyncOperation.swift in Sources */,
 				D01EB0671F7BBC5C0042C837 /* Bundle-Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -458,7 +472,6 @@
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 4.0;
 			};
@@ -475,7 +488,6 @@
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 4.0;
 			};
@@ -493,7 +505,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 4.0;
 			};
@@ -511,7 +522,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 4.0;
 			};
@@ -573,6 +583,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -624,6 +635,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -636,7 +648,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.radianttap.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -649,7 +660,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.radianttap.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
