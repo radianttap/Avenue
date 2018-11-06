@@ -175,7 +175,7 @@
 		D05E0D0B1F48466B0000EAF1 = {
 			isa = PBXGroup;
 			children = (
-				D05E0D291F4846920000EAF1 /* Network */,
+				D05E0D291F4846920000EAF1 /* Avenue */,
 				D01EB05F1F7BBBE60042C837 /* IvkoService */,
 				D05E0D161F48466C0000EAF1 /* Demo */,
 				D01EB06B1F7BC0030042C837 /* DemoWatch */,
@@ -208,7 +208,7 @@
 			path = Demo;
 			sourceTree = "<group>";
 		};
-		D05E0D291F4846920000EAF1 /* Network */ = {
+		D05E0D291F4846920000EAF1 /* Avenue */ = {
 			isa = PBXGroup;
 			children = (
 				D05E0D2C1F4846AC0000EAF1 /* NetworkPayload.swift */,
@@ -220,7 +220,7 @@
 				D05E0D2D1F4846AC0000EAF1 /* ServerTrustPolicy.swift */,
 				D05E0D2B1F4846AC0000EAF1 /* Network-Extensions.swift */,
 			);
-			name = Network;
+			name = Avenue;
 			sourceTree = "<group>";
 		};
 		D05E0D2F1F4846D70000EAF1 /* Vendor */ = {
