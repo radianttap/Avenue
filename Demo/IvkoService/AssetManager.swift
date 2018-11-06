@@ -76,24 +76,19 @@ fileprivate extension AssetManager {
 	}()
 
 	static var userAgent: String = {
-		#if os(iOS)
-			let osName = UIDevice.current.systemName
-			let osVersion = UIDevice.current.systemVersion
-			let deviceVersion = UIDevice.current.model
-		#endif
-		#if os(watchOS)
-			let osName = "watchOS"
-			let osVersion = ""
-			let deviceVersion = "Apple Watch"
-		#endif
+	#if os(watchOS)
+		let osName = "watchOS"
+		let osVersion = ""
+		let deviceVersion = "Apple Watch"
+	#else
+		let osName = UIDevice.current.systemName
+		let osVersion = UIDevice.current.systemVersion
+		let deviceVersion = UIDevice.current.model
+	#endif
 
 		let locale = Locale.current.identifier
 		return "\( Bundle.appName ) \( Bundle.appVersion ) (\( Bundle.appBuild )); \( deviceVersion ); \( osName ) \( osVersion ); \( locale )"
 	}()
-
-	enum Method: String {
-		case GET, POST, PUT, DELETE
-	}
 
 	//	MARK:- Execution
 
