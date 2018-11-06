@@ -211,7 +211,7 @@ fileprivate extension IvkoService {
 
 			if let tsStart = payload.tsStart, let tsEnd = payload.tsEnd {
 				let period = tsEnd.timeIntervalSince(tsStart) * 1000
-				print("\t⏱: \( period ) ms")
+				print("\tURL: \( urlRequest.url?.absoluteString ?? "" )\n\t⏱: \( period ) ms")
 			}
 
 			//	process the returned stuff, now
@@ -234,6 +234,10 @@ fileprivate extension IvkoService {
 			}
 
 			guard let data = payload.data else {
+				if path.method.allowsEmptyResponseData {
+					callback(nil, nil)
+					return
+				}
 				callback(nil, IvkoServiceError.emptyResponse)
 				return
 			}
@@ -241,7 +245,7 @@ fileprivate extension IvkoService {
 			guard
 				let obj = try? JSONSerialization.jsonObject(with: data, options: [.allowFragments])
 			else {
-				//	convert to string, so it‘ logged what‘s actually returned
+				//	convert to string, so it logged what‘s actually returned
 				let str = String(data: data, encoding: .utf8)
 				callback(nil, IvkoServiceError.unexpectedResponse(httpURLResponse, str))
 				return

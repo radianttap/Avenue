@@ -28,30 +28,19 @@ final class ViewController: UIViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 
-//		service.call(path: .promotions) {
-//			[weak self] json, serviceError in
-//
-//			DispatchQueue.main.async {
-//				guard let `self` = self else { return }
-//
-//				if let serviceError = serviceError {
-//					self.textView.text = serviceError.localizedDescription
-//					return
-//				}
-//
-//				self.textView.text = String(describing: json ?? [:])
-//			}
-//		}
+		let path = IvkoService.Path.promotions
+		service.call(path: path) {
+			[weak self] json, serviceError in
 
-		if let url = assetManager.cleanurl() {
-			assetManager.call(url: url) {
-				_, _ in
-			}
-		}
+			DispatchQueue.main.async {
+				guard let `self` = self else { return }
 
-		if let url = assetManager.cleanurl() {
-			assetManager.call(url: url) {
-				_, _ in
+				if let serviceError = serviceError {
+					self.textView.text = serviceError.localizedDescription
+					return
+				}
+
+				self.textView.text = "Completed network call to IvkoService.Path.\( path )\n(See Xcode console for details)"
 			}
 		}
 	}

@@ -121,6 +121,8 @@
 		D05E0D2E1F4846AC0000EAF1 /* NetworkOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
 		D08555FB2190AA5B00721800 /* Atomic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		D08555FD2190AA5B00721800 /* AsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
+		D08556052191B5AC00721800 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		D08556062191B5AD00721800 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,14 +143,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D01EB05F1F7BBBE60042C837 /* IvkoService */ = {
+		D01EB05F1F7BBBE60042C837 /* ExampleWrappers */ = {
 			isa = PBXGroup;
 			children = (
 				D01EB0601F7BBBE60042C837 /* AssetManager.swift */,
 				D01EB0611F7BBBE60042C837 /* IvkoService.swift */,
 				D01EB0621F7BBBE60042C837 /* IvkoServiceError.swift */,
 			);
-			path = IvkoService;
+			path = ExampleWrappers;
 			sourceTree = "<group>";
 		};
 		D01EB06B1F7BC0030042C837 /* DemoWatch */ = {
@@ -175,11 +177,13 @@
 		D05E0D0B1F48466B0000EAF1 = {
 			isa = PBXGroup;
 			children = (
+				D08556062191B5AD00721800 /* LICENSE */,
+				D08556052191B5AC00721800 /* README.md */,
 				D05E0D291F4846920000EAF1 /* Avenue */,
 				D05E0D161F48466C0000EAF1 /* Demo */,
 				D01EB06B1F7BC0030042C837 /* DemoWatch */,
 				D01EB07A1F7BC0040042C837 /* DemoWatch Extension */,
-				D01EB05F1F7BBBE60042C837 /* IvkoService */,
+				D01EB05F1F7BBBE60042C837 /* ExampleWrappers */,
 				D05E0D2F1F4846D70000EAF1 /* Vendor */,
 				D05E0D151F48466C0000EAF1 /* Products */,
 			);

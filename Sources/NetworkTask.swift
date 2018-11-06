@@ -5,6 +5,8 @@
 //  Copyright © 2017 Radiant Tap
 //  MIT License · http://choosealicense.com/licenses/mit/
 //
+//	See this blog post for more information why are these extensions needed:
+//	http://aplus.rs/2017/urlsession-in-operation/
 
 import Foundation
 
