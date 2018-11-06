@@ -56,7 +56,7 @@ extension IvkoService {
 	//	MARK:- Endpoint wrappers
 	enum Path {
 		case promotions
-		case seasons
+		case seasons(seasonCode: Int?)
 		case products
 		case details(styleCode: String)
 
@@ -76,14 +76,17 @@ extension IvkoService {
 			return h
 		}
 
-		private var fullURL: URL {
+		private var url: URL {
 			var url = IvkoService.shared.baseURL
 
 			switch self {
 			case .promotions:
 				url.appendPathComponent("slides.json")
-			case .seasons:
-				url.appendPathComponent("seasons.json")
+			case .seasons(let seasonCode):
+				url.appendPathComponent("seasons")
+				if let seasonCode = seasonCode {
+					url = url.appendingPathComponent("\( seasonCode )")
+				}
 			case .products:
 				url.appendPathComponent("products.json")
 			case .details:
@@ -93,8 +96,8 @@ extension IvkoService {
 			return url
 		}
 
-		private var params: [String: String] {
-			var p : [String: String] = [:]
+		private var params: [String: Any] {
+			var p: [String: Any] = [:]
 
 			switch self {
 			case .details(let styleCode):
@@ -106,25 +109,15 @@ extension IvkoService {
 			return p
 		}
 
-		private var encodedParams: String {
-			switch self {
-			case .details:
-				return queryEncoded(params: params)
-			default:
-				return ""
-			}
-		}
+		private var queryItems: [URLQueryItem] {
+			var arr: [URLQueryItem] = []
 
-		private func queryEncoded(params: [String: String]) -> String {
-			if params.count == 0 { return "" }
-
-			var arr = [String]()
 			for (key, value) in params {
-				let s = "\(key)=\(value)"
-				arr.append(s)
+				let qi = URLQueryItem(name: key, value: "\( value )")
+				arr.append( qi )
 			}
 
-			return arr.joined(separator: "&")
+			return arr
 		}
 
 		private func jsonEncoded(params: JSON) -> Data? {
@@ -132,29 +125,28 @@ extension IvkoService {
 		}
 
 		fileprivate var urlRequest: URLRequest {
-			guard var components = URLComponents(url: fullURL, resolvingAgainstBaseURL: false) else { fatalError("Invalid URL") }
+			guard var comps = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
+				fatalError("Invalid path-based URL")
+			}
+			comps.queryItems = queryItems
 
-			switch method {
-			case .GET:
-				components.query = queryEncoded(params: params)
-			default:
-				break
+			guard let finalURL = comps.url else {
+				fatalError("Invalid query items...(probably)")
 			}
 
-			guard let url = components.url else { fatalError("Invalid URL") }
-			var r = URLRequest(url: url)
-			r.httpMethod = method.rawValue
-			r.allHTTPHeaderFields = headers
+			var req = URLRequest(url: finalURL)
+			req.httpMethod = method.rawValue
+			req.allHTTPHeaderFields = headers
 
 			switch method {
 			case .POST:
-				r.httpBody = jsonEncoded(params: params)
+				req.httpBody = jsonEncoded(params: params)
 				break
 			default:
 				break
 			}
 
-			return r
+			return req
 		}
 	}
 }
