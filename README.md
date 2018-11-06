@@ -1,6 +1,7 @@
-# Swift-Network
+# Avenue
+(formerly Swift-Network)
 
-Simple, strictly focused micro-library you should use as foundation for your web service client code.
+Simple, strictly focused micro-library you should use as foundation for your web service client code. Or 
 
 ## Setup
 
@@ -14,12 +15,13 @@ Not everything needs to be packaged like external library. It’s ok to just cop
 
 ### Instructions
 
-I usually create `Vendor` folder group for all 3rd-party code, then inside it I have `Network` folder and add these files:
+(1) I usually create `Vendor` folder group for all 3rd-party code, then inside it I have `Avenue` folder and copy the files from `Sources`:
 
 ```
 Vendor/
-  Network/
-	  AsyncOperation.swift
+  Avenue/
+    Atomic.swift
+    AsyncOperation.swift
     Network-Extensions.swift
     NetworkError.swift
     NetworkHTTPMethod.swift
@@ -30,41 +32,42 @@ Vendor/
     ServerTrustPolicy.swift
 ```
 
-Open `Network-Extensions.swift`, read the ATTENTION notice and act accordingly, if needed.
+(2) Open `Network-Extensions.swift`, read the ATTENTION notice and act accordingly, if needed.
 
 ## Usage
 
-`NetworkSession` is main class. To write your API wrapper, you should subclass it and simply provide the desired `URLSessionConfiguration` you need. 
+* `NetworkSession` is main class. To write your API wrapper, you should subclass it and simply provide the desired `URLSessionConfiguration` you need. 
 
 > See `AssetManager` and `IvkoService` in the Demo project, as examples. Write as many of these as you need.
 
-Wrap each network request you make into `NetworkOperation` and use an `OperationQueue` to manage them. There should be no need to subclass it further but don’t be afraid to do so.
+* Wrap each network request you make into `NetworkOperation` and use an `OperationQueue` to manage them. There should be no need to subclass it further but don’t be afraid to do so.
 
-Extend `NetworkError` enum with more cases if you need them.
+* Extend `NetworkError` enum with more cases if you need them.
 
-`NetworkPayload` is particularly useful struct since it aggregates `URLRequest` + response headers, data and error _and_ gives you simple speed metering capability.
+* `NetworkPayload` is particularly useful struct since it aggregates `URLRequest` + response headers, data and error _and_ gives you simple speed metering capability by recording start and end of each network call.
 
-`ServerTrustPolicy` is directly picked up from Alamofire; it’s great as it is and there’s no need to reinvent the wheel.
+* `ServerTrustPolicy` is directly picked up from [Alamofire](https://github.com/Alamofire/Alamofire); it’s great as it is and there’s no need to reinvent the wheel.
 
-`AsyncOperation` is my own [simple subclass](https://github.com/radianttap/Swift-Essentials/blob/master/Operation/AsyncOperation.swift) which makes sure that `Operation` is marked `finished` only when the network async callback returns.
+`AsyncOperation` is my own [simple subclass](https://github.com/radianttap/Swift-Essentials/blob/master/Operation/AsyncOperation.swift) which makes sure that `Operation` is marked `finished` only when the network async callback returns. `Atomic.swift` is required by AsyncOperation.
 
 ## NetworkTask
 
-This trickery is required to overcome URLSession/URLSessionTask API design, which is not compatible with `Operation`s. Read the [related post on my blog](http://aplus.rs/2017/thoughts-on-urlsession/) for more thoughts on this.
+I have extended URLSessionTask with additional properties.
+Such [trickery is required](http://aplus.rs/2017/urlsession-in-operation/) to overcome URLSession/URLSessionTask API design, which is not compatible with `Operation`s. Read the [original post on my blog](http://aplus.rs/2017/thoughts-on-urlsession/) for more thoughts on this.
 
 Apple [insists](http://developer.apple.com/videos/play/wwdc2017/709) that you should re-use `URLSession` instance across your app or at least have one per host.
 
-Ok. But then I need to open some doors to re-route data received in the `URLSessionDelegate` (that’s `NetworkSession`) into the `URLSessionDataTask` created internally in the `NetworkOperation`. 
+Thus I needed to open some doors to re-route data received in the `URLSessionDelegate` (that’s `NetworkSession` in Avenue) into the `URLSessionDataTask` created internally inside the `NetworkOperation`. 
 
 ## Compatibility
 
-I have used it and tested it extensively (on live projects) in **iOS 10+** and **watchOS 3.2+**. It probably works in earlier versions but I have not tried it. I suspect it will work just fine on tvOS and macOS but I have not tried that either.
+I have used it and tested it extensively (on live projects) in **iOS 10+** and **watchOS 3.2+** and **tvOS 10+**. It probably works in earlier versions but I have not tried it. I suspect it will work just fine on macOS too but I have not tried that either.
 
-It can be compiled with Swift 3.2 and Swift 4.0 compilers.
+The latest version is Swift 4.2 compatible.
 
 ## License
 
-[MIT License,](https://github.com/radianttap/Swift-Network/blob/v2/LICENSE) like all my open source code.
+[MIT License,](https://github.com/radianttap/Avenue/blob/v2/LICENSE) like all my open source code.
 
 ## Credits
 
