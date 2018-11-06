@@ -91,9 +91,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D0117ABB1F9CC26700F5D4E1 /* NetworkHTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkHTTPMethod.swift; path = ../NetworkHTTPMethod.swift; sourceTree = "<group>"; };
-		D0117ABE1F9CC87900F5D4E1 /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkSession.swift; path = ../NetworkSession.swift; sourceTree = "<group>"; };
-		D0117AC11F9CF66000F5D4E1 /* NetworkTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkTask.swift; path = ../NetworkTask.swift; sourceTree = "<group>"; };
+		D0117ABB1F9CC26700F5D4E1 /* NetworkHTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHTTPMethod.swift; sourceTree = "<group>"; };
+		D0117ABE1F9CC87900F5D4E1 /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
+		D0117AC11F9CF66000F5D4E1 /* NetworkTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTask.swift; sourceTree = "<group>"; };
 		D01EB0601F7BBBE60042C837 /* AssetManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetManager.swift; sourceTree = "<group>"; };
 		D01EB0611F7BBBE60042C837 /* IvkoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IvkoService.swift; sourceTree = "<group>"; };
 		D01EB0621F7BBBE60042C837 /* IvkoServiceError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IvkoServiceError.swift; sourceTree = "<group>"; };
@@ -114,11 +114,11 @@
 		D05E0D1E1F48466C0000EAF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D05E0D211F48466C0000EAF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D05E0D231F48466C0000EAF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D05E0D2A1F4846AC0000EAF1 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkError.swift; path = ../NetworkError.swift; sourceTree = "<group>"; };
-		D05E0D2B1F4846AC0000EAF1 /* Network-Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Network-Extensions.swift"; path = "../Network-Extensions.swift"; sourceTree = "<group>"; };
-		D05E0D2C1F4846AC0000EAF1 /* NetworkPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkPayload.swift; path = ../NetworkPayload.swift; sourceTree = "<group>"; };
-		D05E0D2D1F4846AC0000EAF1 /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ServerTrustPolicy.swift; path = ../ServerTrustPolicy.swift; sourceTree = "<group>"; };
-		D05E0D2E1F4846AC0000EAF1 /* NetworkOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkOperation.swift; path = ../NetworkOperation.swift; sourceTree = "<group>"; };
+		D05E0D2A1F4846AC0000EAF1 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		D05E0D2B1F4846AC0000EAF1 /* Network-Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network-Extensions.swift"; sourceTree = "<group>"; };
+		D05E0D2C1F4846AC0000EAF1 /* NetworkPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkPayload.swift; sourceTree = "<group>"; };
+		D05E0D2D1F4846AC0000EAF1 /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerTrustPolicy.swift; sourceTree = "<group>"; };
+		D05E0D2E1F4846AC0000EAF1 /* NetworkOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
 		D08555FB2190AA5B00721800 /* Atomic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		D08555FD2190AA5B00721800 /* AsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -176,10 +176,10 @@
 			isa = PBXGroup;
 			children = (
 				D05E0D291F4846920000EAF1 /* Avenue */,
-				D01EB05F1F7BBBE60042C837 /* IvkoService */,
 				D05E0D161F48466C0000EAF1 /* Demo */,
 				D01EB06B1F7BC0030042C837 /* DemoWatch */,
 				D01EB07A1F7BC0040042C837 /* DemoWatch Extension */,
+				D01EB05F1F7BBBE60042C837 /* IvkoService */,
 				D05E0D2F1F4846D70000EAF1 /* Vendor */,
 				D05E0D151F48466C0000EAF1 /* Products */,
 			);
@@ -211,6 +211,8 @@
 		D05E0D291F4846920000EAF1 /* Avenue */ = {
 			isa = PBXGroup;
 			children = (
+				D08555FB2190AA5B00721800 /* Atomic.swift */,
+				D08555FC2190AA5B00721800 /* Operation */,
 				D05E0D2C1F4846AC0000EAF1 /* NetworkPayload.swift */,
 				D0117ABE1F9CC87900F5D4E1 /* NetworkSession.swift */,
 				D05E0D2E1F4846AC0000EAF1 /* NetworkOperation.swift */,
@@ -221,13 +223,12 @@
 				D05E0D2B1F4846AC0000EAF1 /* Network-Extensions.swift */,
 			);
 			name = Avenue;
+			path = ../Sources;
 			sourceTree = "<group>";
 		};
 		D05E0D2F1F4846D70000EAF1 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
-				D08555FB2190AA5B00721800 /* Atomic.swift */,
-				D08555FC2190AA5B00721800 /* Operation */,
 				D01EB0661F7BBC5C0042C837 /* Bundle-Extensions.swift */,
 			);
 			path = Vendor;
