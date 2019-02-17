@@ -11,12 +11,12 @@
 
 import Foundation
 
-enum NetworkHTTPMethod: String {
+public enum NetworkHTTPMethod: String {
 	case GET, POST
 	case HEAD, PUT, DELETE
 	case OPTIONS, TRACE, CONNECT
 
-	var allowsEmptyResponseData: Bool {
+	public var allowsEmptyResponseData: Bool {
 		switch self {
 		case .GET, .POST:
 			return false

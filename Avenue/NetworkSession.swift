@@ -34,15 +34,15 @@ import Foundation
 ///
 ///	Auth challenges like ServerTrust will be automatically handled, using URLSession.serverTrustPolicy value (defined elsewhere).
 ///	`userCancelledAuthentication` error will be returned if evaluation fails.
-class NetworkSession: NSObject {
-	var urlSessionConfiguration: URLSessionConfiguration
-	var urlSession: URLSession!
+open class NetworkSession: NSObject {
+	public private(set) var urlSessionConfiguration: URLSessionConfiguration
+	public private(set) var urlSession: URLSession!
 
 	private override init() {
 		fatalError("Must use `init(urlSessionConfiguration:)")
 	}
 
-	init(urlSessionConfiguration: URLSessionConfiguration = .default) {
+	public init(urlSessionConfiguration: URLSessionConfiguration = .default) {
 		self.urlSessionConfiguration = urlSessionConfiguration
 		super.init()
 
@@ -53,35 +53,18 @@ class NetworkSession: NSObject {
 
 	deinit {
 		//	this cancels immediatelly
-//		urlSession.invalidateAndCancel()
+		//	urlSession.invalidateAndCancel()
 
 		//	this will allow background tasks to finish-up first
 		urlSession.finishTasksAndInvalidate()
 	}
 }
 
-extension NetworkSession: URLSessionDataDelegate {
-	//	MARK: Authentication callbacks
-
-	func urlSession(_ session: URLSession,
-					didReceive challenge: URLAuthenticationChallenge,
-					completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void)
-	{
-		handleURLSession(session, task: nil, didReceive: challenge, completionHandler: completionHandler)
-	}
-
-	func urlSession(_ session: URLSession,
-					task: URLSessionTask,
-					didReceive challenge: URLAuthenticationChallenge,
-					completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void)
-	{
-		handleURLSession(session, task: task as? URLSessionDataTask, didReceive: challenge, completionHandler: completionHandler)
-	}
-
-	private func handleURLSession(_ session: URLSession,
-									 task: URLSessionDataTask?,
-									 didReceive challenge: URLAuthenticationChallenge,
-									 completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void)
+private extension NetworkSession {
+	func handleURLSession(_ session: URLSession,
+						  task: URLSessionDataTask?,
+						  didReceive challenge: URLAuthenticationChallenge,
+						  completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void)
 	{
 		if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
 			guard let trust = challenge.protectionSpace.serverTrust else {
@@ -109,11 +92,40 @@ extension NetworkSession: URLSessionDataDelegate {
 
 		completionHandler(.performDefaultHandling, nil)
 	}
+}
 
-	//	MARK: Data callbacks
+//	MARK: Authentication callbacks
 
+extension NetworkSession: URLSessionDelegate {
+
+	public final func urlSession(_ session: URLSession,
+								 didReceive challenge: URLAuthenticationChallenge,
+								 completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void)
+	{
+		handleURLSession(session, task: nil, didReceive: challenge, completionHandler: completionHandler)
+	}
+
+}
+
+extension NetworkSession: URLSessionTaskDelegate {
+	public final func urlSession(_ session: URLSession,
+								 task: URLSessionTask,
+								 didReceive challenge: URLAuthenticationChallenge,
+								 completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void)
+	{
+		handleURLSession(session, task: task as? URLSessionDataTask, didReceive: challenge, completionHandler: completionHandler)
+	}
+}
+
+//	MARK: Data callbacks
+
+extension NetworkSession: URLSessionDataDelegate {
 	//	this checks the response headers
-	final func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
+	public final func urlSession(_ session: URLSession,
+								 dataTask: URLSessionDataTask,
+								 didReceive response: URLResponse,
+								 completionHandler: @escaping (URLSession.ResponseDisposition) -> Void)
+	{
 		guard let httpResponse = response as? HTTPURLResponse else {
 			completionHandler(.cancel)
 			dataTask.errorCallback(.invalidResponse)
@@ -128,11 +140,17 @@ extension NetworkSession: URLSessionDataDelegate {
 	}
 
 	//	this will be called multiple times while the data is coming in
-	final func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+	public final func urlSession(_ session: URLSession,
+								 dataTask: URLSessionDataTask,
+								 didReceive data: Data)
+	{
 		dataTask.dataCallback(data)
 	}
 
-	final func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Swift.Error?) {
+	public final func urlSession(_ session: URLSession,
+								 task: URLSessionTask,
+								 didCompleteWithError error: Swift.Error?)
+	{
 		guard let dataTask = task as? URLSessionDataTask else { return }
 
 		if let e = error {

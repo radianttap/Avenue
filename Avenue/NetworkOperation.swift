@@ -23,7 +23,7 @@ import Foundation
 ///
 ///	If you are using `.background` URLSessionConfiguration, you **must** use URLSessionDelegate
 ///	thus you must supply URLSession instance to the `init`.
-final class NetworkOperation: AsyncOperation {
+public final class NetworkOperation: AsyncOperation {
 	typealias Callback = (NetworkPayload) -> Void
 
 	required init() {
@@ -97,7 +97,7 @@ final class NetworkOperation: AsyncOperation {
 	//	MARK: AsyncOperation
 
 	/// Set network start timestamp, creates URLSessionDataTask and starts it (resume)
-	override func workItem() {
+	public override func workItem() {
 		payload.start()
 
 		if localURLSession == nil {
@@ -164,7 +164,7 @@ final class NetworkOperation: AsyncOperation {
 		callback(payload)
 	}
 
-	internal override func cancel() {
+	public override func cancel() {
 		super.cancel()
 
 		task?.cancel()

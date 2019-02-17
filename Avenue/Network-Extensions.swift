@@ -19,7 +19,7 @@ extension ServerTrustPolicy {
 	///	ATTENTION:
 	///	Move this setting to some configuration .swift file, per target.
 	///	So you can have diff. setting for development, testing, production build etc.
-	static var defaultPolicy: ServerTrustPolicy {
+	public static var defaultPolicy: ServerTrustPolicy {
 		return ServerTrustPolicy.disableEvaluation
 	}
 }
@@ -28,7 +28,7 @@ extension ServerTrustPolicy {
 //	(no need to move these anywhere)
 
 extension URLSession {
-	var serverTrustPolicy : ServerTrustPolicy {
+	public var serverTrustPolicy : ServerTrustPolicy {
 		return ServerTrustPolicy.defaultPolicy
 	}
 }
@@ -36,7 +36,7 @@ extension URLSession {
 
 #if os(iOS)
 extension WKWebView {
-	var serverTrustPolicy : ServerTrustPolicy {
+	public var serverTrustPolicy : ServerTrustPolicy {
 		return ServerTrustPolicy.defaultPolicy
 	}
 }
