@@ -54,6 +54,7 @@ class NetworkSession: NSObject {
 	deinit {
 		//	this cancels immediatelly
 //		urlSession.invalidateAndCancel()
+
 		//	this will allow background tasks to finish-up first
 		urlSession.finishTasksAndInvalidate()
 	}

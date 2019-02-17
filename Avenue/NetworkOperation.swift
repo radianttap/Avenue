@@ -16,10 +16,13 @@ import Foundation
 ///	Or `URLSession` instance if you have it somewhere else.
 ///
 ///	If you don't supply URLSession instance, it will internally create one and use it, just for this one request.
-///	In this case, no delegate callback execute and thus Auth challenges are not handled. If you need that, make `NetworkSession` subclass.
+///	In this case, no delegate callback execute and thus Auth challenges are not handled.
+///	(If you need that, subclass `NetworkSession` and build from there)
+///
 ///	Note: if you don‘t use the URLSession with delegate, you have no way to handle HTTP Authentication challenges.
 ///
-///	If you are using `.background` URLSessionConfiguration, you **must** use URLSessionDelegate thus you must supply URLSession instance to the `init`.
+///	If you are using `.background` URLSessionConfiguration, you **must** use URLSessionDelegate
+///	thus you must supply URLSession instance to the `init`.
 final class NetworkOperation: AsyncOperation {
 	typealias Callback = (NetworkPayload) -> Void
 
@@ -100,6 +103,7 @@ final class NetworkOperation: AsyncOperation {
 		if localURLSession == nil {
 			//	Create local instance of URLSession, no delegate will be used
 			localURLSession = URLSession(configuration: self.urlSessionConfiguration)
+
 			//	we need to finish and clean-up tasks at the end
 			shouldCleanupURLSession = true
 
@@ -137,8 +141,10 @@ final class NetworkOperation: AsyncOperation {
 
 		//	First create the task
 		task = localURLSession.dataTask(with: payload.urlRequest)
+
 		//	then setup handlers for URLSessionDelegate calls
 		setupCallbacks()
+
 		//	and start it
 		task?.resume()
 	}
@@ -147,6 +153,7 @@ final class NetworkOperation: AsyncOperation {
 		if shouldCleanupURLSession {
 			//	this cancels immediatelly
 //			localURLSession.invalidateAndCancel()
+
 			//	this will allow background tasks to finish-up first
 			localURLSession.finishTasksAndInvalidate()
 		}
