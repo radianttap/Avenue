@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.watchos.deployment_target 	= "3.0"
   s.tvos.deployment_target 		= "10.0"
   s.source       = { :git => "https://github.com/radianttap/Avenue.git" }
-  s.source_files = 'Avenue/*.swift'
+  s.source_files = 'Avenue/**/*.swift'
   s.frameworks   = 'Foundation'
   s.swift_version = '4.2'
 
