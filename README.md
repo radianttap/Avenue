@@ -1,63 +1,120 @@
 # Avenue
-(formerly Swift-Network)
 
-Simple, strictly focused micro-library you should use as foundation for your web service client code. Or 
+Micro-library designed to allow seamless cooperation between URLSession(Data)Task and Operation(Queue) APIs.
 
-## Setup
+## Installation
 
-This is really simple micro-library. It could have just few files but I deliberately split into multiple files, for clarity and easier maintenance.
+### Manually
 
-I expect that you may need to tweak some things here and there. Add your own custom `NetworkError` case or similar. That’s why…
+Add folder `Avenue` into your project.
 
-### No CocoaPods. No Carthage. 
+· · ·
 
-Not everything needs to be packaged like external library. It’s ok to just copy stuff into your project.
+If you prefer to use dependency managers, see below. 
+Releases are tagged with [Semantic Versioning](https://semver.org) in mind.
 
-### Instructions
+### CocoaPods
 
-(1) I usually create `Vendor` folder group for all 3rd-party code, then inside it I have `Avenue` folder and copy the files from `Sources`:
+[CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate Avenue into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
-```
-Vendor/
-  Avenue/
-    Atomic.swift
-    AsyncOperation.swift
-    Network-Extensions.swift
-    NetworkError.swift
-    NetworkHTTPMethod.swift
-    NetworkOperation.swift
-    NetworkPayload.swift
-    NetworkSession.swift
-    NetworkTask.swift
-    ServerTrustPolicy.swift
+```ruby
+pod 'Avenue', 	:git => 'https://github.com/radianttap/Avenue.git'
 ```
 
-(2) Open `Network-Extensions.swift`, read the ATTENTION notice and act accordingly, if needed.
+### Carthage
+
+[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that automates the process of adding frameworks to your Cocoa application.
+
+You can install Carthage with [Homebrew](http://brew.sh/) using the following command:
+
+```bash
+$ brew update
+$ brew install carthage
+```
+
+To integrate Avenue into your Xcode project using Carthage, specify it in your `Cartfile`:
+
+```ogdl
+github "radianttap/Avenue"
+```
 
 ## Usage
 
-* `NetworkSession` is main class. To write your API wrapper, you should subclass it and simply provide the desired `URLSessionConfiguration` you need. 
+(1) Subclass `NetworkSession` to create your API wrapper, configure URLSession for the given service endpoints and make an OperationQueue instance. 
+
+```swift
+final class WebService: NetworkSession {
+	private init() {
+		queue = {
+			let oq = OperationQueue()
+			oq.qualityOfService = .userInitiated
+			return oq
+		}()
+
+		let urlSessionConfiguration: URLSessionConfiguration = {
+			let c = URLSessionConfiguration.default
+			c.allowsCellularAccess = true
+			c.httpCookieAcceptPolicy = .never
+			c.httpShouldSetCookies = false
+			c.requestCachePolicy = .reloadIgnoringLocalCacheData
+			return c
+		}()
+
+		super.init(urlSessionConfiguration: urlSessionConfiguration)
+	}
+
+	//	Local stuff
+
+	private var queue: OperationQueue
+}
+```
+
+(2) Model API endpoints in any way you want. See IvkoService example in the Demo app for one possible way, using enum with associated values.
+
+The end result of that model would be `URLRequest` instance.
+
+(3) Create an instance of `NetworkOperation` and add it to the `queue`
+
+```swift
+let op = NetworkOperation(urlRequest: urlRequest, urlSession: urlSession) {
+	payload in
+	//   ...process NetworkPayload...
+}
+queue.addOperation(op)
+```
+
+It will be automatically executed.
 
 > See `AssetManager` and `IvkoService` in the Demo project, as examples. Write as many of these as you need.
 
-* Wrap each network request you make into `NetworkOperation` and use an `OperationQueue` to manage them. There should be no need to subclass it further but don’t be afraid to do so.
+### Tips
 
-* Extend `NetworkError` enum with more cases if you need them.
+* Avenue handles just the URLSession boilerplate: URLErrors, HTTP Auth challenges, Server Trust Policy etc. 
+
+* The only assumption Avenue makes is that web service you connect to is HTTP(S) based. 
 
 * `NetworkPayload` is particularly useful struct since it aggregates `URLRequest` + response headers, data and error _and_ gives you simple speed metering capability by recording start and end of each network call.
 
-* `ServerTrustPolicy` is directly picked up from [Alamofire](https://github.com/Alamofire/Alamofire); it’s great as it is and there’s no need to reinvent the wheel.
+* `ServerTrustPolicy` is directly picked up from [Alamofire v4](https://github.com/Alamofire/Alamofire/tree/4.8.1); it’s great as it is and there’s no need for me to reinvent the wheel.
 
-`AsyncOperation` is my own [simple subclass](https://github.com/radianttap/Swift-Essentials/blob/master/Operation/AsyncOperation.swift) which makes sure that `Operation` is marked `finished` only when the network async callback returns. `Atomic.swift` is required by AsyncOperation.
+* Set `ServerTrustPolicy.defaultPolicy` in your project configuration file (or wherever is appropriate) to the value you need for each app target you have. For example, if you connect to some self-signed demo API host:\
+`ServerTrustPolicy.defaultPolicy = .disableEvaluation`
 
-## NetworkTask
+Note: `AsyncOperation` is my own [simple subclass](https://github.com/radianttap/Swift-Essentials/blob/master/Operation/AsyncOperation.swift) which makes sure that `Operation` is marked `finished` only when the network async callback returns. `Atomic.swift` is required by AsyncOperation.
 
-I have extended URLSessionTask with additional properties.
-Such [trickery is required](http://aplus.rs/2017/urlsession-in-operation/) to overcome URLSession/URLSessionTask API design, which is not compatible with `Operation`s. Read the [original post on my blog](http://aplus.rs/2017/thoughts-on-urlsession/) for more thoughts on this.
+## Why?
 
-Apple [insists](http://developer.apple.com/videos/play/wwdc2017/709) that you should re-use `URLSession` instance across your app or at least have one per host.
+URLSession framework is, on its own, [incompatible](http://aplus.rs/2017/thoughts-on-urlsession/) with Operation API. A bit of [trickery is required](http://aplus.rs/2017/urlsession-in-operation/) to make them cooperate.
+(note: do read those blog posts)
 
-Thus I needed to open some doors to re-route data received in the `URLSessionDelegate` (that’s `NetworkSession` in Avenue) into the `URLSessionDataTask` created internally inside the `NetworkOperation`. 
+I have [extended URLSessionTask](https://github.com/radianttap/Avenue/blob/master/Avenue/NetworkTask.swift) with additional properties of specific closure types which allows you to overcome this incompatibility. 
+
+OperationQueue and Operation are great API to use when...
+
+* your network requests are inter-dependent on each other
+* need to implement OAuth2 or any other kind of asynchronous 3rd-party authentication mechanism
+* tight control over the number of concurrent requests towards a particular host is paramount
+* etc.
 
 ## Compatibility
 
@@ -84,6 +141,8 @@ I want re-iterate what Marcus said at the end of his talk:
 * ATS ([Advanced Transport Security](https://developer.apple.com/library/content/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW33))
 
 * TN2232: [HTTPS Server Trust Evaluation](https://developer.apple.com/library/content/technotes/tn2232/)
+
+* WWDC 2017, Session 709: [Advances in Networking, Part 2](http://developer.apple.com/videos/play/wwdc2017/709)
 
 ### Helpful articles
 
