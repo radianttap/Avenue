@@ -74,14 +74,11 @@ private extension NetworkSession {
 			let host = challenge.protectionSpace.host
 
 			guard session.serverTrustPolicy.evaluate(trust, forHost: host) else {
-				completionHandler(.rejectProtectionSpace, nil)
-
 				if let dataTask = task {
-					let authError = NetworkError.urlError( NSError(domain: NSURLErrorDomain,
-																   code: URLError.userCancelledAuthentication.rawValue,
-																   userInfo: nil) as? URLError )
+					let authError = NetworkError.urlError( URLError(.userCancelledAuthentication) )
 					dataTask.errorCallback(authError)
 				}
+				completionHandler(.rejectProtectionSpace, nil)
 				return
 			}
 
@@ -153,8 +150,11 @@ extension NetworkSession: URLSessionDataDelegate {
 	{
 		guard let dataTask = task as? URLSessionDataTask else { return }
 
-		if let e = error {
-			dataTask.errorCallback( .urlError(e as? URLError) )
+		if let e = error as? URLError {
+			dataTask.errorCallback( .urlError(e) )
+			return
+		} else if let e = error {
+			dataTask.errorCallback( .other(e) )
 			return
 		}
 		dataTask.finishCallback()
