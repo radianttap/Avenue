@@ -9,7 +9,7 @@
 
 import Foundation
 
-open class AsyncOperation : Operation {
+public class AsyncOperation : Operation {
 	private enum State {
 		case ready
 		case executing

@@ -14,7 +14,7 @@ import Dispatch
 
 /// A wrapper for atomic read/write access to a value.
 /// The value is protected by a serial `DispatchQueue`.
-public final class Atomic<A> {
+final class Atomic<A> {
 	private var _value: A
 	private let queue: DispatchQueue
 
@@ -29,13 +29,13 @@ public final class Atomic<A> {
 	///   more information on how to use target queues effectively.
 	///
 	///   The default value is `nil`, which means no target queue will be set.
-	public init(_ value: A, targetQueue: DispatchQueue? = nil) {
+	init(_ value: A, targetQueue: DispatchQueue? = nil) {
 		_value = value
 		queue = DispatchQueue(label: "com.olebegemann.Atomic", target: targetQueue)
 	}
 
 	/// Read access to the wrapped value.
-	public var atomic: A {
+	var atomic: A {
 		return queue.sync { _value }
 	}
 
@@ -64,13 +64,13 @@ public final class Atomic<A> {
 }
 
 extension Atomic: Equatable where A: Equatable {
-	public static func ==(lhs: Atomic, rhs: Atomic) -> Bool {
+	static func ==(lhs: Atomic, rhs: Atomic) -> Bool {
 		return lhs.atomic == rhs.atomic
 	}
 }
 
 extension Atomic: Hashable where A: Hashable {
-	public var hashValue: Int {
+	var hashValue: Int {
 		return atomic.hashValue
 	}
 }
