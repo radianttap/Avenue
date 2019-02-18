@@ -7,25 +7,25 @@
 //
 
 import Foundation
-
-#if os(iOS)
+#if os(iOS) || os(tvOS)
 import WebKit
 #endif
+
+
 
 extension ServerTrustPolicy {
 	///	Default value to use throughout the app, aids consistency.
 	///	URLSession and WKWebView‘s `serverTrustPolicy` should use this value.
 	///
 	///	ATTENTION:
-	///	Move this setting to some configuration .swift file, per target.
+	///	Override this setting in some configuration .swift file, per target.
 	///	So you can have diff. setting for development, testing, production build etc.
-	public static var defaultPolicy: ServerTrustPolicy {
-		return ServerTrustPolicy.disableEvaluation
-	}
+	public static var defaultPolicy: ServerTrustPolicy = .performDefaultEvaluation(validateHost: true)
 }
 
-//	These below will simply follow what the setting above has
-//	(no need to move these anywhere)
+
+
+//	These below will simply follow what the setting above is
 
 extension URLSession {
 	public var serverTrustPolicy : ServerTrustPolicy {
@@ -33,8 +33,7 @@ extension URLSession {
 	}
 }
 
-
-#if os(iOS)
+#if os(iOS) || os(tvOS)
 extension WKWebView {
 	public var serverTrustPolicy : ServerTrustPolicy {
 		return ServerTrustPolicy.defaultPolicy
