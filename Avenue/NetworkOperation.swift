@@ -28,7 +28,7 @@ public class NetworkOperation: AsyncOperation {
 	///   - urlRequest: `URLRequest` value to execute
 	///   - urlSession: URLSession instance to use for task created in this Operation
 	///   - callback: A closure to pass the result back
-	init(urlRequest: URLRequest,
+	public init(urlRequest: URLRequest,
 		 urlSession: URLSession,
 		 callback: @escaping (NetworkPayload) -> Void)
 	{
