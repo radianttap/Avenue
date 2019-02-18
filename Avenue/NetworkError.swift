@@ -17,5 +17,7 @@ public enum NetworkError: Error {
 
 	case cancelled
 
-	case urlError(URLError?)
+	case urlError(URLError)
+
+	case other(Swift.Error)
 }
