@@ -26,26 +26,8 @@
 		D05E0D1D1F48466C0000EAF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D05E0D1B1F48466C0000EAF1 /* Main.storyboard */; };
 		D05E0D1F1F48466C0000EAF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D05E0D1E1F48466C0000EAF1 /* Assets.xcassets */; };
 		D05E0D221F48466C0000EAF1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D05E0D201F48466C0000EAF1 /* LaunchScreen.storyboard */; };
-		D06189C22219815900C2F698 /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189B72219815900C2F698 /* NetworkOperation.swift */; };
-		D06189C32219815900C2F698 /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189B72219815900C2F698 /* NetworkOperation.swift */; };
-		D06189C42219815900C2F698 /* NetworkHTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189B82219815900C2F698 /* NetworkHTTPMethod.swift */; };
-		D06189C52219815900C2F698 /* NetworkHTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189B82219815900C2F698 /* NetworkHTTPMethod.swift */; };
-		D06189C62219815900C2F698 /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189B92219815900C2F698 /* NetworkSession.swift */; };
-		D06189C72219815900C2F698 /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189B92219815900C2F698 /* NetworkSession.swift */; };
-		D06189C82219815900C2F698 /* NetworkTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189BA2219815900C2F698 /* NetworkTask.swift */; };
-		D06189C92219815900C2F698 /* NetworkTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189BA2219815900C2F698 /* NetworkTask.swift */; };
-		D06189CA2219815900C2F698 /* NetworkPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189BB2219815900C2F698 /* NetworkPayload.swift */; };
-		D06189CB2219815900C2F698 /* NetworkPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189BB2219815900C2F698 /* NetworkPayload.swift */; };
-		D06189CC2219815900C2F698 /* Network-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189BC2219815900C2F698 /* Network-Extensions.swift */; };
-		D06189CD2219815900C2F698 /* Network-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189BC2219815900C2F698 /* Network-Extensions.swift */; };
-		D06189CE2219815900C2F698 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189BE2219815900C2F698 /* Atomic.swift */; };
-		D06189CF2219815900C2F698 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189BE2219815900C2F698 /* Atomic.swift */; };
-		D06189D02219815900C2F698 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189BF2219815900C2F698 /* AsyncOperation.swift */; };
-		D06189D12219815900C2F698 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189BF2219815900C2F698 /* AsyncOperation.swift */; };
-		D06189D22219815900C2F698 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189C02219815900C2F698 /* NetworkError.swift */; };
-		D06189D32219815900C2F698 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189C02219815900C2F698 /* NetworkError.swift */; };
-		D06189D42219815900C2F698 /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189C12219815900C2F698 /* ServerTrustPolicy.swift */; };
-		D06189D52219815900C2F698 /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189C12219815900C2F698 /* ServerTrustPolicy.swift */; };
+		D0B1F481221AC2A4000913B4 /* Avenue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0B1F480221AC2A4000913B4 /* Avenue.framework */; };
+		D0B1F483221AC376000913B4 /* Avenue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0B1F482221AC376000913B4 /* Avenue.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,18 +93,10 @@
 		D05E0D1E1F48466C0000EAF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D05E0D211F48466C0000EAF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D05E0D231F48466C0000EAF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D06189B72219815900C2F698 /* NetworkOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
-		D06189B82219815900C2F698 /* NetworkHTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkHTTPMethod.swift; sourceTree = "<group>"; };
-		D06189B92219815900C2F698 /* NetworkSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
-		D06189BA2219815900C2F698 /* NetworkTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTask.swift; sourceTree = "<group>"; };
-		D06189BB2219815900C2F698 /* NetworkPayload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkPayload.swift; sourceTree = "<group>"; };
-		D06189BC2219815900C2F698 /* Network-Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Network-Extensions.swift"; sourceTree = "<group>"; };
-		D06189BE2219815900C2F698 /* Atomic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
-		D06189BF2219815900C2F698 /* AsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
-		D06189C02219815900C2F698 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
-		D06189C12219815900C2F698 /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerTrustPolicy.swift; sourceTree = "<group>"; };
 		D08556052191B5AC00721800 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		D08556062191B5AD00721800 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		D0B1F480221AC2A4000913B4 /* Avenue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Avenue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0B1F482221AC376000913B4 /* Avenue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Avenue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0B1F483221AC376000913B4 /* Avenue.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0B1F481221AC2A4000913B4 /* Avenue.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,7 +153,6 @@
 		D05E0D0B1F48466B0000EAF1 = {
 			isa = PBXGroup;
 			children = (
-				D06189B62219815900C2F698 /* Avenue */,
 				D08556062191B5AD00721800 /* LICENSE */,
 				D08556052191B5AC00721800 /* README.md */,
 				D05E0D161F48466C0000EAF1 /* Demo */,
@@ -186,6 +161,7 @@
 				D01EB05F1F7BBBE60042C837 /* ExampleWrappers */,
 				D05E0D2F1F4846D70000EAF1 /* Vendor */,
 				D05E0D151F48466C0000EAF1 /* Products */,
+				D0B1F47F221AC2A4000913B4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -220,30 +196,13 @@
 			path = Vendor;
 			sourceTree = "<group>";
 		};
-		D06189B62219815900C2F698 /* Avenue */ = {
+		D0B1F47F221AC2A4000913B4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D06189B72219815900C2F698 /* NetworkOperation.swift */,
-				D06189B82219815900C2F698 /* NetworkHTTPMethod.swift */,
-				D06189B92219815900C2F698 /* NetworkSession.swift */,
-				D06189BA2219815900C2F698 /* NetworkTask.swift */,
-				D06189BB2219815900C2F698 /* NetworkPayload.swift */,
-				D06189BC2219815900C2F698 /* Network-Extensions.swift */,
-				D06189BD2219815900C2F698 /* Essentials */,
-				D06189C02219815900C2F698 /* NetworkError.swift */,
-				D06189C12219815900C2F698 /* ServerTrustPolicy.swift */,
+				D0B1F482221AC376000913B4 /* Avenue.framework */,
+				D0B1F480221AC2A4000913B4 /* Avenue.framework */,
 			);
-			name = Avenue;
-			path = ../Avenue;
-			sourceTree = "<group>";
-		};
-		D06189BD2219815900C2F698 /* Essentials */ = {
-			isa = PBXGroup;
-			children = (
-				D06189BE2219815900C2F698 /* Atomic.swift */,
-				D06189BF2219815900C2F698 /* AsyncOperation.swift */,
-			);
-			path = Essentials;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -382,20 +341,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D06189CD2219815900C2F698 /* Network-Extensions.swift in Sources */,
-				D06189D32219815900C2F698 /* NetworkError.swift in Sources */,
-				D06189D12219815900C2F698 /* AsyncOperation.swift in Sources */,
 				D01EB07E1F7BC0040042C837 /* ExtensionDelegate.swift in Sources */,
 				D01EB08F1F7BC0900042C837 /* Bundle-Extensions.swift in Sources */,
-				D06189C52219815900C2F698 /* NetworkHTTPMethod.swift in Sources */,
-				D06189CF2219815900C2F698 /* Atomic.swift in Sources */,
 				D01EB08E1F7BC08A0042C837 /* IvkoServiceError.swift in Sources */,
-				D06189C92219815900C2F698 /* NetworkTask.swift in Sources */,
 				D01EB08D1F7BC08A0042C837 /* IvkoService.swift in Sources */,
-				D06189C72219815900C2F698 /* NetworkSession.swift in Sources */,
-				D06189CB2219815900C2F698 /* NetworkPayload.swift in Sources */,
-				D06189D52219815900C2F698 /* ServerTrustPolicy.swift in Sources */,
-				D06189C32219815900C2F698 /* NetworkOperation.swift in Sources */,
 				D01EB07C1F7BC0040042C837 /* InterfaceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,21 +354,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D01EB0651F7BBBE60042C837 /* IvkoServiceError.swift in Sources */,
-				D06189C82219815900C2F698 /* NetworkTask.swift in Sources */,
-				D06189CC2219815900C2F698 /* Network-Extensions.swift in Sources */,
 				D05E0D1A1F48466C0000EAF1 /* ViewController.swift in Sources */,
-				D06189CE2219815900C2F698 /* Atomic.swift in Sources */,
 				D01EB0641F7BBBE60042C837 /* IvkoService.swift in Sources */,
-				D06189D02219815900C2F698 /* AsyncOperation.swift in Sources */,
-				D06189C62219815900C2F698 /* NetworkSession.swift in Sources */,
-				D06189CA2219815900C2F698 /* NetworkPayload.swift in Sources */,
-				D06189D22219815900C2F698 /* NetworkError.swift in Sources */,
 				D05E0D181F48466C0000EAF1 /* AppDelegate.swift in Sources */,
-				D06189D42219815900C2F698 /* ServerTrustPolicy.swift in Sources */,
 				D01EB0631F7BBBE60042C837 /* AssetManager.swift in Sources */,
-				D06189C42219815900C2F698 /* NetworkHTTPMethod.swift in Sources */,
 				D01EB0671F7BBC5C0042C837 /* Bundle-Extensions.swift in Sources */,
-				D06189C22219815900C2F698 /* NetworkOperation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,12 +412,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "DemoWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.radianttap.Demo.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radianttap.AvenueDemo.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+				WATCHOS_DEPLOYMENT_TARGET = 5.0;
 			};
 			name = Debug;
 		};
@@ -489,12 +428,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "DemoWatch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.radianttap.Demo.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radianttap.AvenueDemo.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+				WATCHOS_DEPLOYMENT_TARGET = 5.0;
 			};
 			name = Release;
 		};
@@ -506,12 +445,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				IBSC_MODULE = DemoWatch_Extension;
 				INFOPLIST_FILE = DemoWatch/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = com.radianttap.Demo.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radianttap.AvenueDemo.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+				WATCHOS_DEPLOYMENT_TARGET = 5.0;
 			};
 			name = Debug;
 		};
@@ -523,12 +462,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				IBSC_MODULE = DemoWatch_Extension;
 				INFOPLIST_FILE = DemoWatch/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = com.radianttap.Demo.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radianttap.AvenueDemo.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+				WATCHOS_DEPLOYMENT_TARGET = 5.0;
 			};
 			name = Release;
 		};
@@ -582,7 +521,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -636,7 +575,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -651,7 +590,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.radianttap.Demo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radianttap.AvenueDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -663,7 +602,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.radianttap.Demo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radianttap.AvenueDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

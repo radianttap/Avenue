@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Avenue
 
 final class AssetManager: NetworkSession {
 	static let shared = AssetManager()

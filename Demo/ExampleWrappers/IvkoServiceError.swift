@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Avenue
 
 
 enum IvkoServiceError: Error {
