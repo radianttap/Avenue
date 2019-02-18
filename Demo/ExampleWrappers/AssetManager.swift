@@ -32,7 +32,7 @@ final class AssetManager: NetworkSession {
 
 	//	Local stuff
 
-	fileprivate var queue: OperationQueue
+	private var queue: OperationQueue
 }
 
 extension AssetManager {
