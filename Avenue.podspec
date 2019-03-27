@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'Avenue'
-  s.version      = '3.0'
+  s.version      = '3.1'
   s.summary      = 'Micro-library designed to allow seamless cooperation between URLSession(Data)Task and Operation(Queue) APIs.'
   s.homepage     = 'https://github.com/radianttap/Avenue'
   s.license      = { :type => "MIT", :file => "LICENSE" }
@@ -12,7 +12,8 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/radianttap/Avenue.git" }
   s.source_files = 'Avenue/**/*.swift'
   s.frameworks   = 'Foundation'
-  s.swift_version = '4.2'
+
+  s.swift_versions = ['4.2', '5.0']
 
   s.description  = <<-DESC
 					URLSession framework is, on its own, incompatible with Operation API. A bit of trickery is required to make them cooperate.
