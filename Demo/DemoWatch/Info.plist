@@ -26,7 +26,7 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>WKCompanionAppBundleIdentifier</key>
-	<string>com.radianttap.Demo</string>
+	<string>com.radianttap.AvenueDemo</string>
 	<key>WKWatchKitApp</key>
 	<true/>
 </dict>
