@@ -7,7 +7,7 @@
 //
 
 import Foundation
-#if os(iOS) || os(tvOS)
+#if os(iOS)
 import WebKit
 #endif
 
@@ -33,7 +33,7 @@ extension URLSession {
 	}
 }
 
-#if os(iOS) || os(tvOS)
+#if os(iOS)
 extension WKWebView {
 	public var serverTrustPolicy : ServerTrustPolicy {
 		return ServerTrustPolicy.defaultPolicy
