@@ -1,3 +1,10 @@
+[![](https://img.shields.io/github/tag/radianttap/Avenue.svg?label=current)](https://github.com/radianttap/Avenue/releases)
+![platforms: iOS|tvOS|watchOS](https://img.shields.io/badge/platform-iOS|tvOS|watchOS-blue.svg)
+[![](https://img.shields.io/github/license/radianttap/Avenue.svg)](https://github.com/radianttap/Avenue/blob/master/LICENSE)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-AD4709.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![CocoaPods compatible](https://img.shields.io/badge/CocoaPods-compatible-fb0006.svg)](https://cocoapods.org)
+![](https://img.shields.io/badge/swift-5-223344.svg?logo=swift&labelColor=FA7343&logoColor=white)
+
 # Avenue
 
 Micro-library designed to allow seamless cooperation between URLSession(Data)Task and Operation(Queue) APIs.
