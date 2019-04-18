@@ -26,3 +26,40 @@ public enum NetworkError: Error {
 	//	Some non-URLError returned by URLSession framework
 	case other(Swift.Error)
 }
+
+extension NetworkError: LocalizedError {
+	public var errorDescription: String? {
+		switch self {
+		case .cancelled:
+			return NSLocalizedString("Request cancelled", comment: "")
+
+		case .invalidResponse, .noData:
+			return NSLocalizedString("Request failed", comment: "")
+
+		case .urlError(let urlError):
+			return urlError.localizedDescription
+
+		case .other(let error):
+			return (error as NSError).localizedDescription
+		}
+	}
+
+	public var failureReason: String? {
+		switch self {
+		case .cancelled:
+			return nil
+
+		case .invalidResponse:
+			return NSLocalizedString("Unexpected response received (not HTTP)", comment: "")
+
+		case .noData:
+			return NSLocalizedString("Empty response (no data)", comment: "")
+
+		case .urlError(let urlError):
+			return "\( urlError.errorCode ): \( urlError.userInfo )"
+
+		case .other(let error):
+			return (error as NSError).localizedFailureReason
+		}
+	}
+}
