@@ -34,6 +34,7 @@
 		D06189A922197C3800C2F698 /* Network-Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Network-Extensions.swift"; sourceTree = "<group>"; };
 		D06189AA22197C3800C2F698 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		D06189AB22197C3800C2F698 /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerTrustPolicy.swift; sourceTree = "<group>"; };
+		D0BBC112226903BD0050AA1A /* Avenue.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = Avenue.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +51,7 @@
 		D061898B22197BEF00C2F698 = {
 			isa = PBXGroup;
 			children = (
+				D0BBC112226903BD0050AA1A /* Avenue.podspec */,
 				D06189A022197C3800C2F698 /* Avenue */,
 				D061899722197BEF00C2F698 /* Framework */,
 				D061899622197BEF00C2F698 /* Products */,
