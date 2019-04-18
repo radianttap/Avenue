@@ -37,7 +37,7 @@ extension NetworkError: LocalizedError {
 			return NSLocalizedString("Request failed", comment: "")
 
 		case .urlError(let urlError):
-			return urlError.localizedDescription
+			return (urlError as NSError).localizedDescription
 
 		case .other(let error):
 			return (error as NSError).localizedDescription
@@ -56,7 +56,7 @@ extension NetworkError: LocalizedError {
 			return NSLocalizedString("Empty response (no data)", comment: "")
 
 		case .urlError(let urlError):
-			return "\( urlError.errorCode ): \( urlError.userInfo )"
+			return (urlError as NSError).localizedFailureReason
 
 		case .other(let error):
 			return (error as NSError).localizedFailureReason
