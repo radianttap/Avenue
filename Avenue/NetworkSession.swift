@@ -123,13 +123,16 @@ extension NetworkSession: URLSessionDataDelegate {
 								 didReceive response: URLResponse,
 								 completionHandler: @escaping (URLSession.ResponseDisposition) -> Void)
 	{
-		guard let httpResponse = response as? HTTPURLResponse else {
+		guard let httpURLResponse = response as? HTTPURLResponse else {
 			completionHandler(.cancel)
 			dataTask.errorCallback(.invalidResponseType(response))
 			return
 		}
 
-		dataTask.responseCallback(httpResponse)
+		//	for now, just save the response headers
+		dataTask.responseCallback(httpURLResponse)
+		//	checking statusCode will be done in task.finishCallback,
+		//	in order to first receive possible error message in the body
 
 		//	always allow data to arrive in order to
 		//	extract possible API error messages
@@ -144,19 +147,22 @@ extension NetworkSession: URLSessionDataDelegate {
 		dataTask.dataCallback(data)
 	}
 
+	//	this is called once, either on URLError or when entire response arrives
 	public final func urlSession(_ session: URLSession,
 								 task: URLSessionTask,
 								 didCompleteWithError error: Swift.Error?)
 	{
 		guard let dataTask = task as? URLSessionDataTask else { return }
 
-		if let e = error as? URLError {
-			dataTask.errorCallback( .urlError(e) )
+		if let urlError = error as? URLError {
+			dataTask.errorCallback( .urlError(urlError) )
 			return
-		} else if let e = error {
-			dataTask.errorCallback( .generalError(e) )
+
+		} else if let otherError = error {
+			dataTask.errorCallback( .generalError(otherError) )
 			return
 		}
+
 		dataTask.finishCallback()
 	}
 }

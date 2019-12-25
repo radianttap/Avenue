@@ -36,8 +36,13 @@ public class NetworkOperation: AsyncOperation {
 		 allowEmptyData: Bool = false,
 		 callback: @escaping (NetworkPayload) -> Void)
 	{
+		if maxRetries <= 0 {
+			fatalError("maxRetries must be 1 or larger.")
+		}
+
 		self.payload = NetworkPayload(urlRequest: urlRequest)
 		self.maxRetries = maxRetries
+		self.allowEmptyData = allowEmptyData
 		self.callback = callback
 		self.urlSessionConfiguration = urlSession.configuration
 		self.urlSession = urlSession
@@ -53,6 +58,7 @@ public class NetworkOperation: AsyncOperation {
 
 	///	Maximum number of retries
 	private(set) var maxRetries: Int
+	private var currentRetries: Int = 0
 
 	///	If `false`, HTTPURLResponse must have some content in its body (if not, it will be treated as error)
 	private(set) var allowEmptyData: Bool = false
@@ -86,8 +92,9 @@ public class NetworkOperation: AsyncOperation {
 
 		//	save the timestamp
 		payload.start()
-		//	and start it
-		task?.resume()
+
+		//	and execute
+		performTask()
 	}
 
 	private func finish() {
@@ -119,14 +126,43 @@ public class NetworkOperation: AsyncOperation {
 //	MARK:- Internal
 
 private extension NetworkOperation {
+	func performTask() {
+		if currentRetries >= maxRetries {
+			//	Too many unsuccessful attemps
+			payload.error = .inaccessible
+			finish()
+
+			return
+		}
+
+		task?.resume()
+	}
+
 	///	Makes URLSession [cooperate nicely](https://aplus.rs/2017/urlsession-in-operation/) with Operation(Queue)
 	func setupCallbacks() {
 		guard let task = task else { return }
 
 		task.errorCallback = {
-			[weak self] error in
-			self?.payload.error = error
-			self?.finish()
+			[weak self] networkError in
+			guard let self = self else { return }
+
+			switch networkError {
+			case .inaccessible:
+				//	too many failed network calls
+				break
+
+			default:
+				if networkError.shouldRetry {
+					//	update retries count and
+					self.currentRetries += 1
+					//	try again
+					self.performTask()
+					return
+				}
+			}
+
+			self.payload.error = networkError
+			self.finish()
 		}
 
 		task.responseCallback = {
@@ -142,6 +178,17 @@ private extension NetworkOperation {
 		task.finishCallback = {
 			[weak self] in
 			guard let self = self else { return }
+			guard let httpURLResponse = self.payload.response else { return }
+
+			if httpURLResponse.statusCode >= 400 {
+				task.errorCallback( NetworkError.endpointError(httpURLResponse, self.incomingData) )
+				return
+			}
+
+			if !self.allowEmptyData, self.incomingData.isEmpty {
+				task.errorCallback( NetworkError.noResponseData(httpURLResponse) )
+				return
+			}
 
 			self.payload.data = self.incomingData
 			self.finish()
