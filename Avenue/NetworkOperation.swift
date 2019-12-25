@@ -44,7 +44,6 @@ public class NetworkOperation: AsyncOperation {
 		self.maxRetries = maxRetries
 		self.allowEmptyData = allowEmptyData
 		self.callback = callback
-		self.urlSessionConfiguration = urlSession.configuration
 		self.urlSession = urlSession
 
 		super.init()
@@ -62,9 +61,6 @@ public class NetworkOperation: AsyncOperation {
 
 	///	If `false`, HTTPURLResponse must have some content in its body (if not, it will be treated as error)
 	private var allowEmptyData: Bool
-
-	///	Configuration to use for the URLSession that will handle `urlRequest`
-	private(set) var urlSessionConfiguration : URLSessionConfiguration
 
 	///	URLSession that will be used for this particular request.
 	///	If you don't supply it in the `init`, it will be created locally for this one request
