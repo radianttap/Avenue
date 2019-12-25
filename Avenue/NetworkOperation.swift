@@ -57,11 +57,11 @@ public class NetworkOperation: AsyncOperation {
 	private(set) var callback: Callback
 
 	///	Maximum number of retries
-	private(set) var maxRetries: Int
+	private var maxRetries: Int
 	private var currentRetries: Int = 0
 
 	///	If `false`, HTTPURLResponse must have some content in its body (if not, it will be treated as error)
-	private(set) var allowEmptyData: Bool = false
+	private var allowEmptyData: Bool
 
 	///	Configuration to use for the URLSession that will handle `urlRequest`
 	private(set) var urlSessionConfiguration : URLSessionConfiguration
