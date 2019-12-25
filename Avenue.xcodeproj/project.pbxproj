@@ -14,12 +14,13 @@
 		D06189B022197C3800C2F698 /* URLSessionTask-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189A622197C3800C2F698 /* URLSessionTask-Extensions.swift */; };
 		D06189B122197C3800C2F698 /* NetworkPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189A722197C3800C2F698 /* NetworkPayload.swift */; };
 		D06189B222197C3800C2F698 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189A822197C3800C2F698 /* Atomic.swift */; };
-		D06189B322197C3800C2F698 /* Network-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189A922197C3800C2F698 /* Network-Extensions.swift */; };
+		D06189B322197C3800C2F698 /* ServerTrust-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189A922197C3800C2F698 /* ServerTrust-Extensions.swift */; };
 		D06189B522197C3800C2F698 /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189AB22197C3800C2F698 /* ServerTrustPolicy.swift */; };
 		D08994D623B381FE00B6B4E7 /* URLSession-extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08994D223B381FE00B6B4E7 /* URLSession-extensions.swift */; };
 		D08994D723B381FE00B6B4E7 /* NetworkError-Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08994D323B381FE00B6B4E7 /* NetworkError-Localized.swift */; };
 		D08994D823B381FE00B6B4E7 /* NetworkError-Retries.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08994D423B381FE00B6B4E7 /* NetworkError-Retries.swift */; };
 		D08994D923B381FE00B6B4E7 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08994D523B381FE00B6B4E7 /* NetworkError.swift */; };
+		D08994DC23B3A3A900B6B4E7 /* NetworkSession-ServerTrust.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08994DB23B3A3A900B6B4E7 /* NetworkSession-ServerTrust.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,12 +33,13 @@
 		D06189A622197C3800C2F698 /* URLSessionTask-Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSessionTask-Extensions.swift"; sourceTree = "<group>"; };
 		D06189A722197C3800C2F698 /* NetworkPayload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkPayload.swift; sourceTree = "<group>"; };
 		D06189A822197C3800C2F698 /* Atomic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
-		D06189A922197C3800C2F698 /* Network-Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Network-Extensions.swift"; sourceTree = "<group>"; };
+		D06189A922197C3800C2F698 /* ServerTrust-Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ServerTrust-Extensions.swift"; sourceTree = "<group>"; };
 		D06189AB22197C3800C2F698 /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerTrustPolicy.swift; sourceTree = "<group>"; };
 		D08994D223B381FE00B6B4E7 /* URLSession-extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSession-extensions.swift"; sourceTree = "<group>"; };
 		D08994D323B381FE00B6B4E7 /* NetworkError-Localized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkError-Localized.swift"; sourceTree = "<group>"; };
 		D08994D423B381FE00B6B4E7 /* NetworkError-Retries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkError-Retries.swift"; sourceTree = "<group>"; };
 		D08994D523B381FE00B6B4E7 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		D08994DB23B3A3A900B6B4E7 /* NetworkSession-ServerTrust.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkSession-ServerTrust.swift"; sourceTree = "<group>"; };
 		D0BBC112226903BD0050AA1A /* Avenue.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = Avenue.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,6 +59,7 @@
 			children = (
 				D08994D123B381FE00B6B4E7 /* Alley */,
 				D06189A222197C3800C2F698 /* Essentials */,
+				D08994DA23B3A29D00B6B4E7 /* ServerTrust */,
 				D0BBC112226903BD0050AA1A /* Avenue.podspec */,
 				D06189A022197C3800C2F698 /* Avenue */,
 				D061899722197BEF00C2F698 /* Framework */,
@@ -88,8 +91,6 @@
 				D06189A122197C3800C2F698 /* NetworkOperation.swift */,
 				D06189A522197C3800C2F698 /* NetworkSession.swift */,
 				D06189A622197C3800C2F698 /* URLSessionTask-Extensions.swift */,
-				D06189AB22197C3800C2F698 /* ServerTrustPolicy.swift */,
-				D06189A922197C3800C2F698 /* Network-Extensions.swift */,
 			);
 			path = Avenue;
 			sourceTree = "<group>";
@@ -112,6 +113,16 @@
 				D08994D523B381FE00B6B4E7 /* NetworkError.swift */,
 			);
 			path = Alley;
+			sourceTree = "<group>";
+		};
+		D08994DA23B3A29D00B6B4E7 /* ServerTrust */ = {
+			isa = PBXGroup;
+			children = (
+				D06189AB22197C3800C2F698 /* ServerTrustPolicy.swift */,
+				D06189A922197C3800C2F698 /* ServerTrust-Extensions.swift */,
+				D08994DB23B3A3A900B6B4E7 /* NetworkSession-ServerTrust.swift */,
+			);
+			path = ServerTrust;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,10 +205,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D08994DC23B3A3A900B6B4E7 /* NetworkSession-ServerTrust.swift in Sources */,
 				D06189AD22197C3800C2F698 /* AsyncOperation.swift in Sources */,
 				D08994D923B381FE00B6B4E7 /* NetworkError.swift in Sources */,
 				D06189B022197C3800C2F698 /* URLSessionTask-Extensions.swift in Sources */,
-				D06189B322197C3800C2F698 /* Network-Extensions.swift in Sources */,
+				D06189B322197C3800C2F698 /* ServerTrust-Extensions.swift in Sources */,
 				D06189AF22197C3800C2F698 /* NetworkSession.swift in Sources */,
 				D06189AC22197C3800C2F698 /* NetworkOperation.swift in Sources */,
 				D08994D823B381FE00B6B4E7 /* NetworkError-Retries.swift in Sources */,
