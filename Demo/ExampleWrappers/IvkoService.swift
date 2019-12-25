@@ -63,8 +63,8 @@ extension IvkoService {
 		case details(styleCode: String)
 
 
-		fileprivate var method: NetworkHTTPMethod {
-			return .GET
+		fileprivate var method: String {
+			return "GET"
 		}
 
 		private var headers: [String: String] {
@@ -137,11 +137,11 @@ extension IvkoService {
 			}
 
 			var req = URLRequest(url: finalURL)
-			req.httpMethod = method.rawValue
+			req.httpMethod = method
 			req.allHTTPHeaderFields = headers
 
 			switch method {
-			case .POST:
+			case "POST":
 				req.httpBody = jsonEncoded(params: params)
 				break
 			default:
@@ -214,25 +214,10 @@ fileprivate extension IvkoService {
 				return
 			}
 
-			guard let httpURLResponse = payload.response else {
-				callback(nil, IvkoServiceError.invalidResponseType)
-				return
-			}
-
-			if !(200...299).contains(httpURLResponse.statusCode) {
-				switch httpURLResponse.statusCode {
-				default:
-					callback(nil, IvkoServiceError.invalidResponseType)
-				}
-				return
-			}
-
-			guard let data = payload.data else {
-				if path.method.allowsEmptyResponseData {
-					callback(nil, nil)
-					return
-				}
-				callback(nil, IvkoServiceError.emptyResponse)
+			guard
+				let httpURLResponse = payload.response,
+				let data = payload.data
+			else {
 				return
 			}
 
