@@ -12,7 +12,5 @@ import Avenue
 
 enum IvkoServiceError: Error {
 	case network(NetworkError?)
-	case invalidResponseType
-	case emptyResponse
 	case unexpectedResponse(HTTPURLResponse, String?)
 }

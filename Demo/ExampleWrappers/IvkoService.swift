@@ -200,7 +200,6 @@ fileprivate extension IvkoService {
 
 	func execute(_ urlRequest: URLRequest, path: Path, callback: @escaping ServiceCallback) {
 		let op = NetworkOperation(urlRequest: urlRequest, urlSession: urlSession) {
-//			[unowned self]
 			payload in
 
 			if let tsStart = payload.tsStart, let tsEnd = payload.tsEnd {
