@@ -26,8 +26,10 @@
 		D05E0D1D1F48466C0000EAF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D05E0D1B1F48466C0000EAF1 /* Main.storyboard */; };
 		D05E0D1F1F48466C0000EAF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D05E0D1E1F48466C0000EAF1 /* Assets.xcassets */; };
 		D05E0D221F48466C0000EAF1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D05E0D201F48466C0000EAF1 /* LaunchScreen.storyboard */; };
-		D0B1F481221AC2A4000913B4 /* Avenue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0B1F480221AC2A4000913B4 /* Avenue.framework */; };
-		D0B1F483221AC376000913B4 /* Avenue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0B1F482221AC376000913B4 /* Avenue.framework */; };
+		D08994EB23B3D30C00B6B4E7 /* Avenue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D08994EA23B3D30300B6B4E7 /* Avenue.framework */; };
+		D08994EC23B3D30C00B6B4E7 /* Avenue.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D08994EA23B3D30300B6B4E7 /* Avenue.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D08994EE23B3D31100B6B4E7 /* Avenue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D08994EA23B3D30300B6B4E7 /* Avenue.framework */; };
+		D08994EF23B3D31100B6B4E7 /* Avenue.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D08994EA23B3D30300B6B4E7 /* Avenue.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = D01EB0691F7BC0030042C837;
 			remoteInfo = DemoWatch;
+		};
+		D08994E923B3D30300B6B4E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D08994E523B3D30300B6B4E7 /* Avenue.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D061899522197BEF00C2F698;
+			remoteInfo = Avenue;
+		};
+		D08994F223B3D44400B6B4E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D08994E523B3D30300B6B4E7 /* Avenue.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D061899422197BEF00C2F698;
+			remoteInfo = Avenue;
+		};
+		D08994F523B3D44F00B6B4E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D08994E523B3D30300B6B4E7 /* Avenue.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D061899422197BEF00C2F698;
+			remoteInfo = Avenue;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -68,6 +91,28 @@
 				D01EB0841F7BC0040042C837 /* DemoWatch.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D08994ED23B3D30C00B6B4E7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D08994EC23B3D30C00B6B4E7 /* Avenue.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D08994F023B3D31100B6B4E7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D08994EF23B3D31100B6B4E7 /* Avenue.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -95,6 +140,9 @@
 		D05E0D231F48466C0000EAF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D08556052191B5AC00721800 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		D08556062191B5AD00721800 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		D08994DD23B3D26700B6B4E7 /* Avenue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Avenue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D08994E123B3D27700B6B4E7 /* Avenue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Avenue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D08994E523B3D30300B6B4E7 /* Avenue.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Avenue.xcodeproj; path = ../Avenue.xcodeproj; sourceTree = "<group>"; };
 		D0B1F480221AC2A4000913B4 /* Avenue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Avenue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0B1F482221AC376000913B4 /* Avenue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Avenue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -104,7 +152,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0B1F483221AC376000913B4 /* Avenue.framework in Frameworks */,
+				D08994EE23B3D31100B6B4E7 /* Avenue.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,7 +160,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0B1F481221AC2A4000913B4 /* Avenue.framework in Frameworks */,
+				D08994EB23B3D30C00B6B4E7 /* Avenue.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,6 +201,7 @@
 		D05E0D0B1F48466B0000EAF1 = {
 			isa = PBXGroup;
 			children = (
+				D08994E523B3D30300B6B4E7 /* Avenue.xcodeproj */,
 				D08556062191B5AD00721800 /* LICENSE */,
 				D08556052191B5AC00721800 /* README.md */,
 				D05E0D161F48466C0000EAF1 /* Demo */,
@@ -196,9 +245,19 @@
 			path = Vendor;
 			sourceTree = "<group>";
 		};
+		D08994E623B3D30300B6B4E7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D08994EA23B3D30300B6B4E7 /* Avenue.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		D0B1F47F221AC2A4000913B4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D08994E123B3D27700B6B4E7 /* Avenue.framework */,
+				D08994DD23B3D26700B6B4E7 /* Avenue.framework */,
 				D0B1F482221AC376000913B4 /* Avenue.framework */,
 				D0B1F480221AC2A4000913B4 /* Avenue.framework */,
 			);
@@ -232,10 +291,12 @@
 				D01EB0721F7BC0040042C837 /* Sources */,
 				D01EB0731F7BC0040042C837 /* Frameworks */,
 				D01EB0741F7BC0040042C837 /* Resources */,
+				D08994F023B3D31100B6B4E7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D08994F323B3D44400B6B4E7 /* PBXTargetDependency */,
 			);
 			name = "DemoWatch Extension";
 			productName = "DemoWatch Extension";
@@ -250,10 +311,12 @@
 				D05E0D111F48466C0000EAF1 /* Frameworks */,
 				D05E0D121F48466C0000EAF1 /* Resources */,
 				D01EB08C1F7BC0040042C837 /* Embed Watch Content */,
+				D08994ED23B3D30C00B6B4E7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D08994F623B3D44F00B6B4E7 /* PBXTargetDependency */,
 				D01EB0831F7BC0040042C837 /* PBXTargetDependency */,
 			);
 			name = Demo;
@@ -297,6 +360,12 @@
 			mainGroup = D05E0D0B1F48466B0000EAF1;
 			productRefGroup = D05E0D151F48466C0000EAF1 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = D08994E623B3D30300B6B4E7 /* Products */;
+					ProjectRef = D08994E523B3D30300B6B4E7 /* Avenue.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				D05E0D131F48466C0000EAF1 /* Demo */,
@@ -305,6 +374,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		D08994EA23B3D30300B6B4E7 /* Avenue.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Avenue.framework;
+			remoteRef = D08994E923B3D30300B6B4E7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		D01EB0681F7BC0030042C837 /* Resources */ = {
@@ -374,6 +453,16 @@
 			isa = PBXTargetDependency;
 			target = D01EB0691F7BC0030042C837 /* DemoWatch */;
 			targetProxy = D01EB0821F7BC0040042C837 /* PBXContainerItemProxy */;
+		};
+		D08994F323B3D44400B6B4E7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Avenue;
+			targetProxy = D08994F223B3D44400B6B4E7 /* PBXContainerItemProxy */;
+		};
+		D08994F623B3D44F00B6B4E7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Avenue;
+			targetProxy = D08994F523B3D44F00B6B4E7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
