@@ -125,7 +125,7 @@ extension NetworkSession: URLSessionDataDelegate {
 	{
 		guard let httpResponse = response as? HTTPURLResponse else {
 			completionHandler(.cancel)
-			dataTask.errorCallback(.invalidResponse)
+			dataTask.errorCallback(.invalidResponseType(response))
 			return
 		}
 
@@ -154,7 +154,7 @@ extension NetworkSession: URLSessionDataDelegate {
 			dataTask.errorCallback( .urlError(e) )
 			return
 		} else if let e = error {
-			dataTask.errorCallback( .other(e) )
+			dataTask.errorCallback( .generalError(e) )
 			return
 		}
 		dataTask.finishCallback()
