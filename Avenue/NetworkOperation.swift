@@ -25,26 +25,37 @@ public class NetworkOperation: AsyncOperation {
 	///	It‘s assumed that URLSessionDelegate is defined elsewhere (see `NetworkSession`) and stuff will be called-in here (see `setupCallbacks()`).
 	///
 	/// - Parameters:
-	///   - urlRequest: `URLRequest` value to execute
-	///   - urlSession: URLSession instance to use for task created in this Operation
+	///   - urlRequest: `URLRequest` value to execute.
+	///   - urlSession: `URLSession` instance to use for execution of task created inside this Operation.
+	///   - maxRetries: Number of automatic retries (default is set during `NetworkSession.init`).
+	///   - allowEmptyData: Should empty response `Data` be treated as failure (this is default) even if no other errors are returned by URLSession. Default is `false`.
 	///   - callback: A closure to pass the result back
 	public init(urlRequest: URLRequest,
 		 urlSession: URLSession,
+		 maxRetries: Int = URLSession.maximumNumberOfRetries,
+		 allowEmptyData: Bool = false,
 		 callback: @escaping (NetworkPayload) -> Void)
 	{
 		self.payload = NetworkPayload(urlRequest: urlRequest)
+		self.maxRetries = maxRetries
 		self.callback = callback
 		self.urlSessionConfiguration = urlSession.configuration
 		self.urlSession = urlSession
-		super.init()
 
-		processHTTPMethod()
+		super.init()
 	}
 
 	//MARK:- Properties
 
 	private(set) var payload: NetworkPayload
+
 	private(set) var callback: Callback
+
+	///	Maximum number of retries
+	private(set) var maxRetries: Int
+
+	///	If `false`, HTTPURLResponse must have some content in its body (if not, it will be treated as error)
+	private(set) var allowEmptyData: Bool = false
 
 	///	Configuration to use for the URLSession that will handle `urlRequest`
 	private(set) var urlSessionConfiguration : URLSessionConfiguration
@@ -58,15 +69,6 @@ public class NetworkOperation: AsyncOperation {
 
 	///	This collects incoming data chunks
 	private var incomingData = Data()
-
-	///	By default, Operation will not treat empty data in the response as error.
-	///	This is normal with HEAD, PUT or DELETE methods, so this value will be changed
-	///	based on the URLRequest.httpMethod value.
-	///	`NetworkHTTPMethod` however declares that GET and POST requests must return some data.
-	///
-	///	If you want to override the default behavior, make sure to set this value
-	///	*after* you create the `NetworkOperation` instance but *before* you add to the `OperationQueue`.
-	open var allowEmptyData: Bool = true
 
 
 
@@ -117,17 +119,7 @@ public class NetworkOperation: AsyncOperation {
 //	MARK:- Internal
 
 private extension NetworkOperation {
-	///	Sets `allowEmptyData` per `NetworkHTTPMethod.allowsEmptyResponseData`
-	func processHTTPMethod() {
-		guard
-			let method = payload.originalRequest.httpMethod,
-			let m = NetworkHTTPMethod(rawValue: method)
-		else { return }
-
-		allowEmptyData = m.allowsEmptyResponseData
-	}
-
-	///	Makes URLSession [cooperate nicely](http://aplus.rs/2017/urlsession-in-operation/) with Operation(Queue)
+	///	Makes URLSession [cooperate nicely](https://aplus.rs/2017/urlsession-in-operation/) with Operation(Queue)
 	func setupCallbacks() {
 		guard let task = task else { return }
 
@@ -150,12 +142,6 @@ private extension NetworkOperation {
 		task.finishCallback = {
 			[weak self] in
 			guard let self = self else { return }
-
-			if self.incomingData.isEmpty && !self.allowEmptyData {
-				self.payload.error = .noData
-				self.finish()
-				return
-			}
 
 			self.payload.data = self.incomingData
 			self.finish()

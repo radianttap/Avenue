@@ -10,7 +10,6 @@
 		D061899A22197BEF00C2F698 /* Avenue.h in Headers */ = {isa = PBXBuildFile; fileRef = D061899822197BEF00C2F698 /* Avenue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D06189AC22197C3800C2F698 /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189A122197C3800C2F698 /* NetworkOperation.swift */; };
 		D06189AD22197C3800C2F698 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189A322197C3800C2F698 /* AsyncOperation.swift */; };
-		D06189AE22197C3800C2F698 /* NetworkHTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189A422197C3800C2F698 /* NetworkHTTPMethod.swift */; };
 		D06189AF22197C3800C2F698 /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189A522197C3800C2F698 /* NetworkSession.swift */; };
 		D06189B022197C3800C2F698 /* URLSessionTask-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189A622197C3800C2F698 /* URLSessionTask-Extensions.swift */; };
 		D06189B122197C3800C2F698 /* NetworkPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06189A722197C3800C2F698 /* NetworkPayload.swift */; };
@@ -29,7 +28,6 @@
 		D061899922197BEF00C2F698 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D06189A122197C3800C2F698 /* NetworkOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
 		D06189A322197C3800C2F698 /* AsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
-		D06189A422197C3800C2F698 /* NetworkHTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkHTTPMethod.swift; sourceTree = "<group>"; };
 		D06189A522197C3800C2F698 /* NetworkSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
 		D06189A622197C3800C2F698 /* URLSessionTask-Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSessionTask-Extensions.swift"; sourceTree = "<group>"; };
 		D06189A722197C3800C2F698 /* NetworkPayload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkPayload.swift; sourceTree = "<group>"; };
@@ -88,7 +86,6 @@
 			children = (
 				D06189A722197C3800C2F698 /* NetworkPayload.swift */,
 				D06189A122197C3800C2F698 /* NetworkOperation.swift */,
-				D06189A422197C3800C2F698 /* NetworkHTTPMethod.swift */,
 				D06189A522197C3800C2F698 /* NetworkSession.swift */,
 				D06189A622197C3800C2F698 /* URLSessionTask-Extensions.swift */,
 				D06189AB22197C3800C2F698 /* ServerTrustPolicy.swift */,
@@ -204,7 +201,6 @@
 				D06189AF22197C3800C2F698 /* NetworkSession.swift in Sources */,
 				D06189AC22197C3800C2F698 /* NetworkOperation.swift in Sources */,
 				D08994D823B381FE00B6B4E7 /* NetworkError-Retries.swift in Sources */,
-				D06189AE22197C3800C2F698 /* NetworkHTTPMethod.swift in Sources */,
 				D08994D723B381FE00B6B4E7 /* NetworkError-Localized.swift in Sources */,
 				D08994D623B381FE00B6B4E7 /* URLSession-extensions.swift in Sources */,
 				D06189B522197C3800C2F698 /* ServerTrustPolicy.swift in Sources */,
