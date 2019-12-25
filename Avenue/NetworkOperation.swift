@@ -152,7 +152,7 @@ private extension NetworkOperation {
 				break
 
 			default:
-				if networkError.shouldRetry {
+				if networkError.shouldRetry, self.maxRetries > 1 {
 					//	update retries count and
 					self.currentRetries += 1
 					//	try again
