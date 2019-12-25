@@ -90,6 +90,7 @@ public class NetworkOperation: AsyncOperation {
 
 	private func finish() {
 		payload.end()
+
 		markFinished()
 
 		callback(payload)
@@ -99,9 +100,17 @@ public class NetworkOperation: AsyncOperation {
 		super.cancel()
 
 		task?.cancel()
-		payload.error = .cancelled
 
-		finish()
+		//	since the Operation is cancelled, clear out any results that we may have received so far
+		payload.data = nil
+		payload.error = nil
+		payload.response = nil
+
+		//	not calling `finish()`, to avoid setting `payload.tsEnd` since it never actually finished
+		//	but must mark Operation as complete so OperationQueue can continue with next one
+		markFinished()
+		//	report back with the payload as it is
+		callback(payload)
 	}
 }
 

@@ -44,10 +44,14 @@ public struct NetworkPayload {
 
 	///	Moment when network task is started (you called `task.resume()` for the first time).
 	///	Call `.start()` to set it.
+	///
+	///	If this value is `nil`, related network request was never even attemted.
 	public private(set) var tsStart: Date?
 
 	///	Moment when network task has ended. Used together with `tsStart` makes for simple speed metering.
 	///	Call `.end()` to set it.
+	///
+	///	Note that if this value is `nil`, it means that request was mostly likely cancelled by end-customer (the Operation itself was cancelled before URLResponse arrived).
 	public private(set) var tsEnd: Date?
 }
 

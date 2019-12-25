@@ -86,11 +86,11 @@
 		D06189A022197C3800C2F698 /* Avenue */ = {
 			isa = PBXGroup;
 			children = (
+				D06189A722197C3800C2F698 /* NetworkPayload.swift */,
 				D06189A122197C3800C2F698 /* NetworkOperation.swift */,
 				D06189A422197C3800C2F698 /* NetworkHTTPMethod.swift */,
 				D06189A522197C3800C2F698 /* NetworkSession.swift */,
 				D06189A622197C3800C2F698 /* URLSessionTask-Extensions.swift */,
-				D06189A722197C3800C2F698 /* NetworkPayload.swift */,
 				D06189AB22197C3800C2F698 /* ServerTrustPolicy.swift */,
 				D06189A922197C3800C2F698 /* Network-Extensions.swift */,
 			);
