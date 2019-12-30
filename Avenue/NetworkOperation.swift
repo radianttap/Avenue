@@ -32,7 +32,7 @@ public class NetworkOperation: AsyncOperation {
 	///   - callback: A closure to pass the result back
 	public init(urlRequest: URLRequest,
 		 urlSession: URLSession,
-		 maxRetries: Int = URLSession.maximumNumberOfRetries,
+		 maxRetries: Int = 10,
 		 allowEmptyData: Bool = false,
 		 callback: @escaping (NetworkPayload) -> Void)
 	{
