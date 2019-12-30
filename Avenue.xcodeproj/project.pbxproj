@@ -24,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D034A6AF23BA1C5B00E84985 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D061899522197BEF00C2F698 /* Avenue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Avenue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D061899822197BEF00C2F698 /* Avenue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Avenue.h; sourceTree = "<group>"; };
 		D061899922197BEF00C2F698 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -57,10 +58,11 @@
 		D061898B22197BEF00C2F698 = {
 			isa = PBXGroup;
 			children = (
+				D034A6AF23BA1C5B00E84985 /* README.md */,
+				D0BBC112226903BD0050AA1A /* Avenue.podspec */,
 				D08994D123B381FE00B6B4E7 /* Alley */,
 				D06189A222197C3800C2F698 /* Essentials */,
 				D08994DA23B3A29D00B6B4E7 /* ServerTrust */,
-				D0BBC112226903BD0050AA1A /* Avenue.podspec */,
 				D06189A022197C3800C2F698 /* Avenue */,
 				D061899722197BEF00C2F698 /* Framework */,
 				D061899622197BEF00C2F698 /* Products */,
